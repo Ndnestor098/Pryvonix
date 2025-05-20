@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { ArrowBigDown, BookOpen } from 'lucide-react';
+import { ArrowBigDown, BookOpen, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Home() {
@@ -10,6 +10,7 @@ export default function Home() {
     });
 
     const [active, setActive] = useState(false);
+    const [notify, setNotify] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -113,17 +114,47 @@ export default function Home() {
             <section id="seccion">
                 {active && text(data.companyName, data.service, data.website)}
             </section>
+
+            {notify ? (
+                <div className="fixed bottom-4 right-4 flex max-w-md items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow-lg transition-shadow hover:shadow-xl">
+                    <MessageCircle className="h-5 w-20 text-blue-700" />
+                    <div>
+                        <h4 className="font-medium text-gray-800">
+                            Aviso Importante
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                            Este formulario es un prototipo diseñado para
+                            mostrar el aspecto y las funciones que se
+                            implementarán en el futuro. Ten en cuenta que la
+                            información que se muestra tras enviarlo es
+                            exactamente la que se enviará al modelo de IA
+                            (ChatGPT).
+                        </p>
+                    </div>
+                    <X
+                        className="h-5 w-20 cursor-pointer text-blue-700"
+                        onClick={() => setNotify(false)}
+                    />
+                </div>
+            ) : (
+                <div className="fixed bottom-4 right-4 flex max-w-md items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow-lg transition-shadow hover:shadow-xl">
+                    <MessageCircle
+                        className="h-5 w-5 cursor-pointer text-blue-700"
+                        onClick={() => setNotify(true)}
+                    />
+                </div>
+            )}
         </>
     );
 }
 
 function text(name, service, website) {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
+        <div className="z-40 min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
             <article className="mx-auto max-w-3xl overflow-hidden rounded-xl bg-white shadow-lg">
                 <div className="p-8">
                     <div className="mb-8 flex items-center gap-3">
-                        <BookOpen className="h-8 w-8 text-indigo-600" />
+                        <BookOpen className="h-8 w-8 text-blue-500" />
                         <h1 className="text-3xl font-bold text-gray-800">
                             Prompt para Enviar a ChatGPT
                         </h1>
