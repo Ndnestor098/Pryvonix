@@ -15,6 +15,15 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-5px)' },
+                },
+            },
+            animation: {
+                float: 'float 2s ease-in-out infinite',
+            },
         },
     },
 
