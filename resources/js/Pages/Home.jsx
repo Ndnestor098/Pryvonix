@@ -2,21 +2,20 @@ import { Head, useForm } from '@inertiajs/react';
 import { ArrowBigDown, BookOpen, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Home() {
-    const { data, setData } = useForm({
+export default function Home({ intro, objectives }) {
+    const { data, setData, post } = useForm({
         companyName: '',
         service: '',
         website: '',
     });
 
-    const [active, setActive] = useState(false);
     const [notify, setNotify] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Datos del formulario:', data);
         // Aquí puedes agregar la lógica para enviar los datos
-        setActive(true);
+        post(route('ai'));
     };
 
     const handleChange = (e) => {
@@ -103,16 +102,18 @@ export default function Home() {
                         </button>
                     </form>
                 </div>
-                {active && (
+                {intro && objectives && (
                     <div className="absolute bottom-2 mx-auto">
                         <a href="#seccion">
-                            <ArrowBigDown className="animate-float h-10 w-10 text-blue-700" />
+                            <ArrowBigDown className="h-10 w-10 animate-float text-blue-700" />
                         </a>
                     </div>
                 )}
             </section>
             <section id="seccion">
-                {active && text(data.companyName, data.service, data.website)}
+                {intro &&
+                    objectives &&
+                    text(intro, objectives)}
             </section>
 
             {notify ? (
