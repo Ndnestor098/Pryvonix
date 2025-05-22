@@ -3,7 +3,7 @@ import { ArrowBigDown, BookOpen, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Home({ intro, objectives }) {
-    const { data, setData, post } = useForm({
+    const { data, setData, get, errors } = useForm({
         companyName: '',
         service: '',
         website: '',
@@ -13,9 +13,9 @@ export default function Home({ intro, objectives }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Datos del formulario:', data);
+
         // Aquí puedes agregar la lógica para enviar los datos
-        post(route('ai'));
+        get(route('ai'));
     };
 
     const handleChange = (e) => {
@@ -54,6 +54,11 @@ export default function Home({ intro, objectives }) {
                                 placeholder="Ingrese el nombre de su empresa"
                                 required
                             />
+                            {errors.companyName && (
+                                <span className="block w-full text-center text-xs font-semibold text-red-700">
+                                    {errors.companyName}
+                                </span>
+                            )}
                         </div>
 
                         <div>
@@ -73,6 +78,11 @@ export default function Home({ intro, objectives }) {
                                 placeholder="Describa el servicio principal"
                                 required
                             />
+                            {errors.service && (
+                                <span className="block w-full text-center text-xs font-semibold text-red-700">
+                                    {errors.service}
+                                </span>
+                            )}
                         </div>
 
                         <div>
@@ -92,6 +102,11 @@ export default function Home({ intro, objectives }) {
                                 placeholder="https://www.ejemplo.com"
                                 required
                             />
+                            {errors.website && (
+                                <span className="block w-full text-center text-xs font-semibold text-red-700">
+                                    {errors.website}
+                                </span>
+                            )}
                         </div>
 
                         <button
@@ -111,9 +126,7 @@ export default function Home({ intro, objectives }) {
                 )}
             </section>
             <section id="seccion">
-                {intro &&
-                    objectives &&
-                    text(intro, objectives)}
+                {intro && objectives && text(intro, objectives)}
             </section>
 
             {notify ? (
@@ -149,7 +162,7 @@ export default function Home({ intro, objectives }) {
     );
 }
 
-function text(name, service, website) {
+function text(intro, objectives) {
     return (
         <div className="z-40 min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
             <article className="mx-auto max-w-3xl overflow-hidden rounded-xl bg-white shadow-lg">
@@ -157,83 +170,40 @@ function text(name, service, website) {
                     <div className="mb-8 flex items-center gap-3">
                         <BookOpen className="h-8 w-8 text-blue-500" />
                         <h1 className="text-3xl font-bold text-gray-800">
-                            Prompt para Enviar a ChatGPT
+                            Respuesta de Prueba enviada por la IA
                         </h1>
                     </div>
 
                     <div className="prose prose-lg prose-indigo max-w-none">
                         <h2 className="mb-4 text-2xl font-semibold text-gray-800">
-                            Introduccion a la IA
+                            {intro}
                         </h2>
-                        <p className="mb-6 leading-relaxed text-gray-600">
-                            <strong>Tu objetivo:</strong>
-                            <br />
-                            Transformar la información estratégica de una
-                            empresa B2B en contenido comercial útil, claro y
-                            escalable. Trabajarás con una empresa líder (quien
-                            contrata el sistema) que quiere mostrar su
-                            experiencia a través de casos de éxito construidos
-                            sobre los problemas, beneficios y contextos reales
-                            de sus clientes finales.
-                            <br />
-                            El sistema se divide en subpasos. En cada uno se
-                            generará contenido estructurado que luego se
-                            asociará a perfiles de cliente para construir
-                            mensajes personalizados.
-                            <br />
-                            <strong>Requisitos:</strong>
-                            <br />
-                            Debes mantener siempre un enfoque profesional,
-                            comercial y orientado a impacto. No utilices
-                            lenguaje hinchado, promocional o autorreferencial.
-                        </p>
 
-                        <h3 className="mb-3 text-xl font-semibold text-gray-800">
-                            Paso 2: Enfoque desde la web del servicio
-                        </h3>
-                        <p className="mb-6 leading-relaxed text-gray-600">
-                            <strong>Objetivo:</strong>
-                            <br />
-                            Establecer una visión clara y estructurada sobre
-                            cómo comunica la empresa líder su servicio en su
-                            página web.
-                            <br />
-                            <strong>La Empresa Lider es:</strong>
-                            <br />
-                            <ul className="mb-2 list-inside list-disc space-y-2 text-gray-600">
-                                <li>
-                                    <strong>{name}</strong>
-                                </li>
-                                <li>
-                                    <strong>{website}</strong>
-                                </li>
-                            </ul>
-                            Nos vamos a centrar únicamente en el servicio de:
-                            <br />
-                            <ul className="list-inside list-disc space-y-2 text-gray-600">
-                                <li>
-                                    <strong>{service}</strong>
-                                </li>
-                            </ul>
-                            Analiza sólo esa sección de la web para identificar:
-                            <br />
-                            <ul className="list-inside list-disc space-y-2 text-gray-600">
-                                <li>
-                                    Tono y enfoque comercial principal (por
-                                    ejemplo: eficiencia, seguridad,
-                                    innovación...)
-                                </li>
-                                <li>Beneficios repetidos o destacado</li>
-                                <li>
-                                    Palabras clave y temas que estructuran la
-                                    propuesta de valor
-                                </li>
-                            </ul>
-                            Este análisis sirve para orientar la selección
-                            posterior de resultados y asegurar que lo que se
-                            extrae está alineado con el posicionamiento actual
-                            del servicio.
-                        </p>
+                        {objectives &&
+                            objectives.map((item, index) => {
+                                return (
+                                    <>
+                                        <h3 className="mb-3 text-xl font-semibold text-gray-800">
+                                            {index + 1}: {item.title}
+                                        </h3>
+                                        <p className="mb-6 leading-relaxed text-gray-600">
+                                            {item.text}
+
+                                            {item.sublist.length > 0 && (
+                                                <ul className="list-inside list-disc space-y-2 text-gray-600">
+                                                    {item.sublist.map(
+                                                        (sublit, index) => (
+                                                            <li key={index}>
+                                                                {sublit.text}
+                                                            </li>
+                                                        ),
+                                                    )}
+                                                </ul>
+                                            )}
+                                        </p>
+                                    </>
+                                );
+                            })}
 
                         {/* <div className="mb-6 border-l-4 border-indigo-600 bg-indigo-50 p-4">
                             <p className="font-medium text-indigo-900">
@@ -244,7 +214,7 @@ function text(name, service, website) {
                                 escalabilidad.
                             </p>
                         </div> */}
-                        <h4 className="mb-3 text-xl font-semibold text-gray-800">
+                        {/* <h4 className="mb-3 text-xl font-semibold text-gray-800">
                             Paso 3 — Selección de 25 beneficios
                         </h4>
                         <p className="mb-6 leading-relaxed text-gray-600">
@@ -301,7 +271,7 @@ function text(name, service, website) {
                             </ul>
                             Cada bloque debe ser breve, directo y aportar una
                             razón concreta y creíble.
-                        </p>
+                        </p> */}
 
                         {/* <div className="mb-6 rounded-lg bg-gray-50 p-6">
                             <h4 className="mb-2 text-lg font-semibold text-gray-800">
