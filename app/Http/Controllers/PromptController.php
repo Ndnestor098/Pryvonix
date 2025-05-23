@@ -53,7 +53,7 @@ class PromptController extends Controller
         - Para sublistas, utiliza siempre el formato jerárquico: 3.1., 3.2., 3.3.
         - No se permiten guiones ni asteriscos al inicio de ninguna línea.
         - El contenido debe seguir estrictamente este formato.
-
+        - No usar en los inicio de los titulos o subtitulos * o #
         ---
     TEXT;
 
@@ -79,16 +79,27 @@ class PromptController extends Controller
             $this->introduction
         );
 
-        $result = $openRouter->sendMessage(
-            $introduction
-        );
+        $yourApiKey = getenv('AI_API_KEY');
+        $client = OpenAI::client($yourApiKey);
+
+        $result = $client->chat()->create([
+            'model' => 'gpt-4o',
+            'messages' => [
+                [
+                    'role' => 'user', 
+                    'content' => $introduction
+                ],
+            ],
+        ]);
+
+        // return $result->choices[0]->message->content;
 
         // Limpia la indentación innecesaria
-        $text = trim($result["choices"][0]["message"]["content"]);
+        $text = trim($result->choices[0]->message->content);
 
         // // Extraer la introducción (todo lo que está antes de "1.")
-        // preg_match('/^(.*?)\s*1\.\s+/s', $text, $introMatch);
-        // $intro = trim($introMatch[1] ?? '');
+        preg_match('/^(.*?)\s*1\.\s+/s', $text, $introMatch);
+        $intro = trim($introMatch[1] ?? '');
 
         // // $intro = preg_replace('/Paso\s*2:.*?Objetivo:\s*/is', '', $intro);
 
@@ -147,10 +158,14 @@ class PromptController extends Controller
             ];
         }
 
-        // return $objectives;
+        // return [
+        //     'data' => $result->choices[0]->message->content,
+        //     'intro' => $intro,
+        //     'objectives' => $objectives,
+        // ];
 
         return Inertia::render('Home', [
-            'intro' => "Paso 2: Enfoque desde la web del servicio",
+            'intro' => $intro,
             'objectives' => $objectives,
         ]);
     }

@@ -175,9 +175,12 @@ function text(intro, objectives) {
                     </div>
 
                     <div className="prose prose-lg prose-indigo max-w-none">
-                        <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+                        {/* <h2 className="mb-4 text-2xl font-semibold text-gray-800">
                             {intro}
-                        </h2>
+                        </h2> */}
+                        <p className="mb-6 leading-relaxed text-gray-600">
+                            {intro}
+                        </p>
 
                         {objectives &&
                             objectives.map((item, index) => {
