@@ -1,15 +1,15 @@
 import Alert from '@/Components/Alert';
 import { Head } from '@inertiajs/react';
-import { BookOpen, House } from 'lucide-react';
+import { BookOpen, House, Link } from 'lucide-react';
 
 export default function Result({ intro, objectives }) {
     return (
         <>
             <Head title="Result" />
 
-            <a href={route('home')}>
+            <Link href={route('home')}>
                 <House className="fixed left-4 top-4 z-10 h-8 w-8 cursor-pointer text-gray-600 hover:text-gray-800" />
-            </a>
+            </Link>
 
             <section className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
                 <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
