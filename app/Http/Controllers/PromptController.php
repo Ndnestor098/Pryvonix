@@ -164,7 +164,7 @@ class PromptController extends Controller
         //     'objectives' => $objectives,
         // ];
 
-        return Inertia::render('Home', [
+        return Inertia::render('Result', [
             'intro' => $intro,
             'objectives' => $objectives,
         ]);
