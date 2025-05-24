@@ -1,6 +1,14 @@
 import MenuSelector from '@/Components/MenuSelector';
 import { Link } from '@inertiajs/react';
-import { ChevronsLeft, ChevronsRight, House, Images, Pen, SquareLibrary, User } from 'lucide-react';
+import {
+    ChevronsLeft,
+    ChevronsRight,
+    House,
+    Images,
+    Pen,
+    SquareLibrary,
+    User,
+} from 'lucide-react';
 import { useState } from 'react';
 
 export default function Layout() {
@@ -67,7 +75,12 @@ export default function Layout() {
                             }`}
                             onClick={() => setSelect(idx)}
                         >
+                            {idx === 2 && (
+                                <div className="bg-morado-100 mb-1 h-[3px] w-6 rounded-full" />
+                            )}
+
                             <Icon className="h-5 w-5" />
+
                             <p className="text-[12px] font-semibold leading-none">
                                 {label}
                             </p>
