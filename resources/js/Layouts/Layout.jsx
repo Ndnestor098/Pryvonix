@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export default function Layout() {
     const [select, setSelect] = useState(0);
-    const [hideAsside, setHideAsside] = useState(true);
+    const [hideAside, setHideAside] = useState(true);
 
     const menu = [
         {
@@ -63,8 +63,9 @@ export default function Layout() {
                             className={`hover:bg-morado-100 hover:text-morado-200 flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg transition duration-200 ${
                                 select === idx
                                     ? 'bg-morado-100 text-morado-200'
-                                    : 'text-morado-50'
+                                    : 'text-morado-250'
                             }`}
+                            onClick={() => setSelect(idx)}
                         >
                             <Icon className="h-5 w-5" />
                             <p className="text-[12px] font-semibold leading-none">
@@ -75,17 +76,74 @@ export default function Layout() {
                 </aside>
 
                 {/* Lateral derecho */}
-                {hideAsside ? (
+                {hideAside ? (
                     <aside className="relative w-[250px] border-r border-gray-200 p-4">
                         <h2 className="text-[15px] font-bold">
                             {menu[select].label}
                         </h2>
-                        <p className="mt-5 text-sm text-gray-500">
-                            Pasos para la creacion
+
+                        <p className="mb-2 mt-5 text-sm text-gray-500">
+                            {select === 0
+                                ? 'Pasos para la creacion'
+                                : 'Arsenal de Mensajes'}
                         </p>
+                        {select === 1 && (
+                            <>
+                                <ul className="flex flex-col gap-1">
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Seleccion de Resultados
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Seleccion de Problemas
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Seleccion de Casos de Uso
+                                    </li>
+                                </ul>
+
+                                <p className="mb-2 mt-5 text-sm text-gray-500">
+                                    Asociacion de Mensajes
+                                </p>
+                                <ul className="flex flex-col gap-1">
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Identificacion de Industrias
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Arquetipos de Clientes
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Asociacion de Mensajes
+                                    </li>
+                                </ul>
+
+                                <p className="mb-2 mt-5 text-sm text-gray-500">
+                                    Transformacion de Mensajes
+                                </p>
+                                <ul className="flex flex-col gap-1">
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Contextualizacion Industrial
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Aplicacion de Contextualizacion
+                                    </li>
+                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
+                                        Preparacion de Perfiles
+                                    </li>
+                                </ul>
+
+                                <p className="mb-2 mt-5 text-sm text-gray-500">
+                                    Estructuracion de Contenido
+                                </p>
+
+                                <p className="mb-2 mt-5 text-sm text-gray-500">
+                                    Plasmacion de Mensajes
+                                </p>
+                            </>
+                        )}
+
                         <div
                             className="absolute right-0 top-10 cursor-pointer rounded-l-lg bg-white py-1"
-                            onClick={() => setHideAsside(false)}
+                            onClick={() => setHideAside(false)}
                         >
                             <ChevronsLeft className="text-morado-50 h-5 w-5" />
                         </div>
@@ -94,7 +152,7 @@ export default function Layout() {
                     <aside className="relative p-4">
                         <div
                             className="absolute left-0 top-10 cursor-pointer rounded-r-lg bg-white py-1"
-                            onClick={() => setHideAsside(true)}
+                            onClick={() => setHideAside(true)}
                         >
                             <ChevronsRight className="text-morado-50 h-5 w-5" />
                         </div>
@@ -103,7 +161,7 @@ export default function Layout() {
 
                 {/* Main content */}
                 <main className="flex-1 p-6">
-                    <p>Hola mundo, esta es la parte del medio</p>
+                    <p>Seccion de Volcado de contenido</p>
                 </main>
             </div>
         </>

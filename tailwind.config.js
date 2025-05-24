@@ -25,9 +25,9 @@ export default {
                 float: 'float 2s ease-in-out infinite',
             },
             colors: {
-                'morado-50': '#9083c5',
                 'morado-100': '#e2ddff',
                 'morado-200': '#534588',
+                'morado-250': '#9083c5',
                 'morado-400': '#694fcd',
                 'morado-500': '#4d407e',
                 'morado-600': '#3e3269',
