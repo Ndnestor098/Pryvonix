@@ -1,4 +1,5 @@
 import Alert from '@/Components/Alert';
+import Layout from '@/Layouts/Layout';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function Home() {
@@ -27,7 +28,9 @@ export default function Home() {
     return (
         <>
             <Head title="Home" />
-            <section className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
+            <Layout />
+
+            {/* <section className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
                 <div className="x-auto w-full max-w-96 rounded-xl bg-white p-8 shadow-lg">
                     <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
                         Registro de Empresa
@@ -114,7 +117,7 @@ export default function Home() {
                         </button>
                     </form>
                 </div>
-            </section>
+            </section> */}
             <Alert />
         </>
     );
