@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Layout() {
+export default function Layout({ children }) {
     const [select, setSelect] = useState(0);
     const [hideAside, setHideAside] = useState(true);
 
@@ -173,9 +173,7 @@ export default function Layout() {
                 )}
 
                 {/* Main content */}
-                <main className="flex-1 p-6">
-                    <p>Seccion de Volcado de contenido</p>
-                </main>
+                <main className="flex-1 p-6">{children}</main>
             </div>
         </>
     );
