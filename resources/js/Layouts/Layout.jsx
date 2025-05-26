@@ -41,7 +41,7 @@ export default function Layout({ children }) {
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-morado-600 fixed z-10 flex h-[50px] w-full items-center px-4">
+            <nav className="fixed z-10 flex h-[50px] w-full items-center bg-morado-600 px-4">
                 <div className="flex items-center gap-9">
                     <div className="flex w-10 items-center justify-center">
                         <Link href={route('home')}>
@@ -53,7 +53,7 @@ export default function Layout({ children }) {
                 <div className="flex flex-1 items-center justify-center">
                     <form className="w-full max-w-[600px]">
                         <input
-                            className="bg-morado-200 h-[36px] w-full rounded-lg p-2 placeholder:text-[15px] placeholder:font-semibold placeholder:text-violet-200"
+                            className="h-[36px] w-full rounded-lg bg-morado-200 p-2 placeholder:text-[15px] placeholder:font-semibold placeholder:text-violet-200"
                             type="search"
                             placeholder="Contenido para Marketing y Ventas"
                         />
@@ -68,7 +68,7 @@ export default function Layout({ children }) {
                     {menu.map(({ icon: Icon, label }, idx) => (
                         <div
                             key={idx}
-                            className={`hover:bg-morado-100 hover:text-morado-200 flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg transition duration-200 ${
+                            className={`flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg transition duration-200 hover:bg-morado-100 hover:text-morado-200 ${
                                 select === idx
                                     ? 'bg-morado-100 text-morado-200'
                                     : 'text-morado-250'
@@ -76,7 +76,7 @@ export default function Layout({ children }) {
                             onClick={() => setSelect(idx)}
                         >
                             {idx === 2 && (
-                                <div className="bg-morado-100 mb-1 h-[3px] w-6 rounded-full" />
+                                <div className="mb-1 h-[3px] w-6 rounded-full bg-morado-100" />
                             )}
 
                             <Icon className="h-5 w-5" />
@@ -89,88 +89,40 @@ export default function Layout({ children }) {
                 </aside>
 
                 {/* Lateral derecho */}
-                {hideAside ? (
-                    <aside className="relative w-[250px] border-r border-gray-200 p-4">
-                        <h2 className="text-[15px] font-bold">
-                            {menu[select].label}
-                        </h2>
+                <div
+                    className={`transition-all duration-300 ease-in-out ${hideAside ? 'w-[250px]' : 'w-[40px]'}`}
+                >
+                    {hideAside ? (
+                        <aside className="relative h-full w-full transform border-r border-gray-200 p-4 transition-transform duration-300 ease-in-out">
+                            {/* Titulo */}
+                            <h2 className="text-[15px] font-bold">
+                                {menu[select].label}
+                            </h2>
 
-                        <p className="mb-2 mt-5 text-sm text-gray-500">
-                            {select === 0
-                                ? 'Pasos para la creacion'
-                                : 'Arsenal de Mensajes'}
-                        </p>
-                        {select === 1 && (
-                            <>
-                                <ul className="flex flex-col gap-1">
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Seleccion de Resultados
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Seleccion de Problemas
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Seleccion de Casos de Uso
-                                    </li>
-                                </ul>
+                            {/* Area de textos y SubMenus */}
+                            <p className="mt-5 text-sm text-gray-500">
+                                Pasos para la creacion
+                            </p>
 
-                                <p className="mb-2 mt-5 text-sm text-gray-500">
-                                    Asociacion de Mensajes
-                                </p>
-                                <ul className="flex flex-col gap-1">
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Identificacion de Industrias
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Arquetipos de Clientes
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Asociacion de Mensajes
-                                    </li>
-                                </ul>
-
-                                <p className="mb-2 mt-5 text-sm text-gray-500">
-                                    Transformacion de Mensajes
-                                </p>
-                                <ul className="flex flex-col gap-1">
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Contextualizacion Industrial
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Aplicacion de Contextualizacion
-                                    </li>
-                                    <li className="hover:bg-morado-100 cursor-pointer rounded-lg px-2 py-1">
-                                        Preparacion de Perfiles
-                                    </li>
-                                </ul>
-
-                                <p className="mb-2 mt-5 text-sm text-gray-500">
-                                    Estructuracion de Contenido
-                                </p>
-
-                                <p className="mb-2 mt-5 text-sm text-gray-500">
-                                    Plasmacion de Mensajes
-                                </p>
-                            </>
-                        )}
-
-                        <div
-                            className="absolute right-0 top-10 cursor-pointer rounded-l-lg bg-white py-1"
-                            onClick={() => setHideAside(false)}
-                        >
-                            <ChevronsLeft className="text-morado-50 h-5 w-5" />
-                        </div>
-                    </aside>
-                ) : (
-                    <aside className="relative p-4">
-                        <div
-                            className="absolute left-0 top-10 cursor-pointer rounded-r-lg bg-white py-1"
-                            onClick={() => setHideAside(true)}
-                        >
-                            <ChevronsRight className="text-morado-50 h-5 w-5" />
-                        </div>
-                    </aside>
-                )}
+                            {/* Boton para cerrar */}
+                            <div
+                                className="absolute right-0 top-10 cursor-pointer rounded-l-lg bg-gray-100 py-1 shadow-md"
+                                onClick={() => setHideAside(false)}
+                            >
+                                <ChevronsLeft className="h-5 w-5 text-morado-400" />
+                            </div>
+                        </aside>
+                    ) : (
+                        <aside className="relative w-full transform bg-white transition-transform duration-300 ease-in-out">
+                            <div
+                                className="absolute left-0 top-10 cursor-pointer rounded-r-lg bg-gray-100 py-1 shadow-md"
+                                onClick={() => setHideAside(true)}
+                            >
+                                <ChevronsRight className="h-5 w-5 text-morado-400" />
+                            </div>
+                        </aside>
+                    )}
+                </div>
 
                 {/* Main content */}
                 <main className="flex-1 p-6">{children}</main>
