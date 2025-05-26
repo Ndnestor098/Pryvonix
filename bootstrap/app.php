@@ -15,6 +15,18 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::prefix('/ai')
                 ->name('ai')
                 ->group(base_path('routes/prompt.php'));
+            Route::prefix('/analisis')
+                ->name('analysis')
+                ->group(base_path('routes/analysis.php'));
+            Route::prefix('/casos')
+                ->name('cases')
+                ->group(base_path('routes/cases.php'));
+            Route::prefix('/images')
+                ->name('images')
+                ->group(base_path('routes/images.php'));
+            Route::prefix('/perfil')
+                ->name('profile')
+                ->group(base_path('routes/profile.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {

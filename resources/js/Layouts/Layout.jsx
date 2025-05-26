@@ -1,5 +1,5 @@
 import MenuSelector from '@/Components/MenuSelector';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
     ChevronsLeft,
     ChevronsRight,
@@ -11,30 +11,36 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Layout({ children }) {
+export default function Layout({ children, subMenu }) {
     const [select, setSelect] = useState(0);
     const [hideAside, setHideAside] = useState(true);
+    const currentUrl = usePage().url;
 
     const menu = [
         {
             icon: House,
             label: 'Inicio',
+            url: 'home',
         },
         {
             icon: Pen,
             label: 'Análisis',
+            url: 'analysis',
         },
         {
             icon: SquareLibrary,
             label: 'Casos',
+            url: 'cases',
         },
         {
             icon: Images,
             label: 'Imágenes',
+            url: 'images',
         },
         {
             icon: User,
             label: 'Perfil',
+            url: 'profile',
         },
     ];
 
@@ -62,30 +68,36 @@ export default function Layout({ children }) {
             </nav>
 
             {/* Contenedor de layout */}
-            <div className="flex h-screen bg-gray-100 pt-[50px]">
+            <div className="flex h-full bg-gray-100 pt-[50px]">
                 {/* Slim Sidebar */}
                 <aside className="flex w-[75px] flex-col items-center space-y-4 border-r border-gray-200 py-4">
-                    {menu.map(({ icon: Icon, label }, idx) => (
-                        <div
-                            key={idx}
-                            className={`flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg transition duration-200 hover:bg-morado-100 hover:text-morado-200 ${
-                                select === idx
-                                    ? 'bg-morado-100 text-morado-200'
-                                    : 'text-morado-250'
-                            }`}
-                            onClick={() => setSelect(idx)}
-                        >
-                            {idx === 2 && (
-                                <div className="mb-1 h-[3px] w-6 rounded-full bg-morado-100" />
-                            )}
+                    {menu.map(({ icon: Icon, label, url }, idx) => {
+                        const isActive = currentUrl.startsWith(
+                            route(url, {}, false),
+                        );
 
-                            <Icon className="h-5 w-5" />
+                        return (
+                            <Link
+                                href={route(url)}
+                                key={idx}
+                                className={`flex h-12 w-14 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg transition duration-200 hover:bg-morado-100 hover:text-morado-200 ${
+                                    isActive
+                                        ? 'bg-morado-100 text-morado-200'
+                                        : 'text-morado-250'
+                                }`}
+                            >
+                                {idx === 2 && (
+                                    <div className="mb-1 h-[3px] w-6 rounded-full bg-morado-100" />
+                                )}
 
-                            <p className="text-[12px] font-semibold leading-none">
-                                {label}
-                            </p>
-                        </div>
-                    ))}
+                                <Icon className="h-5 w-5" />
+
+                                <p className="text-[12px] font-semibold leading-none">
+                                    {label}
+                                </p>
+                            </Link>
+                        );
+                    })}
                 </aside>
 
                 {/* Lateral derecho */}
@@ -100,9 +112,9 @@ export default function Layout({ children }) {
                             </h2>
 
                             {/* Area de textos y SubMenus */}
-                            <p className="mt-5 text-sm text-gray-500">
-                                Pasos para la creacion
-                            </p>
+                            <div className="mt-5 flex flex-col gap-3 text-gray-500">
+                                {subMenu()}
+                            </div>
 
                             {/* Boton para cerrar */}
                             <div
@@ -125,7 +137,9 @@ export default function Layout({ children }) {
                 </div>
 
                 {/* Main content */}
-                <main className="flex-1 p-6">{children}</main>
+                <main className="min-h-screen flex-1 px-16 py-10">
+                    {children}
+                </main>
             </div>
         </>
     );
