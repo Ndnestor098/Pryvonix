@@ -12,20 +12,23 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
+            Route::prefix('/')
+                ->name('home.')
+                ->group(base_path('routes/home.php'));
             Route::prefix('/ai')
                 ->name('ai')
                 ->group(base_path('routes/prompt.php'));
             Route::prefix('/analisis')
-                ->name('analysis')
+                ->name('analysis.')
                 ->group(base_path('routes/analysis.php'));
             Route::prefix('/casos')
-                ->name('cases')
+                ->name('cases.')
                 ->group(base_path('routes/cases.php'));
             Route::prefix('/images')
-                ->name('images')
+                ->name('images.')
                 ->group(base_path('routes/images.php'));
             Route::prefix('/perfil')
-                ->name('profile')
+                ->name('profile.')
                 ->group(base_path('routes/profile.php'));
         }
     )

@@ -6,6 +6,6 @@ use Inertia\Inertia;
 
 Route::get('/', function ()  {
     
-    return "hola";
+    return "Test";
     return Inertia::render();
-});
+})->name('index');

@@ -7,7 +7,7 @@ export default function index() {
     return (
         <>
             <Head title="Analisis" />
-            <Layout subMenu={subMenu}>
+            <Layout subMenu={subMenu} title="Analisis">
                 <div>
                     {/* Header */}
                     <section className="mb-8 flex items-center justify-between">

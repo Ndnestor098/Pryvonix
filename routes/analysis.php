@@ -7,4 +7,4 @@ use Inertia\Inertia;
 Route::get('/', function ()  {
     
     return Inertia::render('Analysis/Index');
-});
+})->name('index');

@@ -11,8 +11,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Layout({ children, subMenu }) {
-    const [select, setSelect] = useState(0);
+export default function Layout({ children, title, subMenu }) {
     const [hideAside, setHideAside] = useState(true);
     const currentUrl = usePage().url;
 
@@ -20,27 +19,27 @@ export default function Layout({ children, subMenu }) {
         {
             icon: House,
             label: 'Inicio',
-            url: 'home',
+            url: 'home.index',
         },
         {
             icon: Pen,
             label: 'Análisis',
-            url: 'analysis',
+            url: 'analysis.index',
         },
         {
             icon: SquareLibrary,
             label: 'Casos',
-            url: 'cases',
+            url: 'cases.index',
         },
         {
             icon: Images,
             label: 'Imágenes',
-            url: 'images',
+            url: 'images.index',
         },
         {
             icon: User,
             label: 'Perfil',
-            url: 'profile',
+            url: 'profile.index',
         },
     ];
 
@@ -50,7 +49,7 @@ export default function Layout({ children, subMenu }) {
             <nav className="fixed z-10 flex h-[50px] w-full items-center bg-morado-600 px-4">
                 <div className="flex items-center gap-9">
                     <div className="flex w-10 items-center justify-center">
-                        <Link href={route('home')}>
+                        <Link href={route('home.index')}>
                             <img src="assets/images/logo.png" alt="Logotipo" />
                         </Link>
                     </div>
@@ -72,9 +71,11 @@ export default function Layout({ children, subMenu }) {
                 {/* Slim Sidebar */}
                 <aside className="flex w-[75px] flex-col items-center space-y-4 border-r border-gray-200 py-4">
                     {menu.map(({ icon: Icon, label, url }, idx) => {
-                        const isActive = currentUrl.startsWith(
-                            route(url, {}, false),
-                        );
+                        const routeUrl = route(url, {}, false);
+                        const isActive =
+                            url === 'home.index'
+                                ? currentUrl === routeUrl
+                                : currentUrl.startsWith(routeUrl);
 
                         return (
                             <Link
@@ -107,9 +108,7 @@ export default function Layout({ children, subMenu }) {
                     {hideAside ? (
                         <aside className="relative h-full w-full transform border-r border-gray-200 p-4 transition-transform duration-300 ease-in-out">
                             {/* Titulo */}
-                            <h2 className="text-[15px] font-bold">
-                                {menu[select].label}
-                            </h2>
+                            <h2 className="text-[15px] font-bold">{title}</h2>
 
                             {/* Area de textos y SubMenus */}
                             <div className="mt-5 flex flex-col gap-3 text-gray-500">

@@ -62,7 +62,7 @@ export default function Home() {
     return (
         <>
             <Head title="Home" />
-            <Layout subMenu={subMenu}>
+            <Layout subMenu={subMenu} title="Inicio">
                 <div>
                     {/* Header */}
                     <section className="mb-8 flex items-center justify-between">
