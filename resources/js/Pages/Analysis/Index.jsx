@@ -1,10 +1,14 @@
 import Alert from '@/Components/Alert';
 import Layout from '@/Layouts/Layout';
 import { Head } from '@inertiajs/react';
-import { ChevronDown, ChevronRight, Flag, BarChart3, ChartNoAxesColumn, Database, Hand } from 'lucide-react';
+import {
+    ChartNoAxesColumn,
+    ChevronDown,
+    ChevronRight,
+    Database,
+} from 'lucide-react';
 
 export default function index() {
-
     return (
         <>
             <Head title="Analisis" />
