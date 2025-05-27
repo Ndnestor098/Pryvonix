@@ -242,8 +242,8 @@ export default function Index() {
     };
 
     const info_cases = {
-        title: 'Problemas',
-        text: 'Identificacion de problemas reconocibles desde la perspectiva del cliente',
+        title: 'Casos de Uso',
+        text: 'Desarrollo de escenarios practicos donde se aplica el servicio',
         submenu: {
             'Control Operativo Avanzado': [
                 {

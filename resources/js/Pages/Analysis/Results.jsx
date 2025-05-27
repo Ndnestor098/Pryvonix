@@ -62,15 +62,13 @@ export default function Results({ info }) {
                             className="h-10 w-10"
                         />
                     </div>
-                    <span className="">
-                        Definición de beneficios accionables
-                    </span>
+                    <span>{info.text}</span>
                 </div>
             </div>
 
             {/* Results Section */}
             <div className="mb-4 text-sm font-medium text-gray-600">
-                Resultados agrupados por categorías
+                {info.title} agrupados por categorías
             </div>
 
             {Object.entries(info.submenu).map(([groupName, items], idx) => (
