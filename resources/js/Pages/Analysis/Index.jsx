@@ -1,4 +1,4 @@
-import Alert from '@/Components/Alert';
+import Up from '@/Components/Up';
 import Layout from '@/Layouts/Layout';
 import { Head } from '@inertiajs/react';
 import {
@@ -125,7 +125,7 @@ export default function index() {
                 </div>
             </Layout>
 
-            <Alert />
+            <Up />
         </>
     );
 }

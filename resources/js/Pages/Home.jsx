@@ -1,4 +1,4 @@
-import Alert from '@/Components/Alert';
+import Up from '@/Components/Up';
 import Layout from '@/Layouts/Layout';
 import { Head, Link } from '@inertiajs/react';
 import {
@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
             </Layout>
 
-            <Alert />
+            <Up />
         </>
     );
 }

@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import { ChevronRight, Factory, Info } from 'lucide-react';
 import { useState } from 'react';
 
@@ -27,129 +26,122 @@ export default function Mensaje({ color, menu, title }) {
     };
 
     return (
-        <>
-            <Head title="Mensajes" />
+        <section className="relative mb-5 flex items-center">
+            <div className="flex h-full max-w-[1230px] overflow-hidden rounded-xl border border-gray-400 bg-gray-50">
+                {/* Sidebar */}
+                <aside className="w-72 border-r border-gray-200 bg-white">
+                    {/* Header */}
+                    <div className="border-b border-gray-300 px-4 py-1">
+                        <h1 className="text-lg font-bold text-gray-500">
+                            {title}
+                        </h1>
+                    </div>
 
-            <section className="relative mb-5 flex items-center">
-                <div className="flex h-full max-w-[1230px] overflow-hidden rounded-xl border border-gray-400 bg-gray-50">
-                    {/* Sidebar */}
-                    <aside className="w-72 border-r border-gray-200 bg-white">
+                    {/* Menu */}
+                    <nav className="space-y-1">
+                        {menu.map((item, index) => (
+                            <button
+                                key={index}
+                                className={`flex w-full justify-center gap-3 border-b border-gray-300 px-3 py-2 transition-colors ${
+                                    activeMenu === item.index
+                                        ? `cursor-default border-l-[5px] ${borderColorClasses[color]}`
+                                        : 'border-l-[5px] border-l-transparent text-gray-700 hover:bg-gray-100'
+                                } `}
+                                onClick={() => setActiveMenu(item.index)}
+                            >
+                                <div className="flex flex-col justify-center gap-2">
+                                    <span
+                                        className={`flex w-min items-center whitespace-nowrap rounded-xl ${bgColorClasses[color]} px-2 py-1 text-sm font-bold text-black`}
+                                    >
+                                        {title}
+                                    </span>
+                                    <span className="text-left text-sm">
+                                        {item.title}
+                                    </span>
+                                </div>
+                                <div className="flex w-full items-center">
+                                    {activeMenu === item.index && (
+                                        <ChevronRight className="ml-auto h-4 w-4" />
+                                    )}
+                                </div>
+                            </button>
+                        ))}
+                    </nav>
+                </aside>
+
+                <section className="flex-1 bg-white px-8 py-8">
+                    <div className="max-w-4xl">
                         {/* Header */}
-                        <div className="border-b border-gray-300 px-4 py-1">
-                            <h1 className="text-lg font-bold text-gray-500">
-                                {title}
-                            </h1>
+                        <div className="mb-8">
+                            <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-gray-800">
+                                <Info
+                                    className={`h-4 w-4 ${textColorClasses[color]}`}
+                                />
+                                {menu[activeMenu].title}
+                            </h2>
+                            <p className="text-gray-600">
+                                Permite acceder al entorno operativo desde
+                                cualquier navegador, sin restricciones técnicas
+                                ni necesidad de instalaciones locales.
+                            </p>
                         </div>
 
-                        {/* Menu */}
-                        <nav className="space-y-1">
-                            {menu.map((item, index) => (
-                                <button
-                                    key={index}
-                                    className={`flex w-full justify-center gap-3 border-b border-gray-300 px-3 py-2 transition-colors ${
-                                        activeMenu === item.index
-                                            ? `cursor-default border-l-[5px] ${borderColorClasses[color]}`
-                                            : 'border-l-[5px] border-l-transparent text-gray-700 hover:bg-gray-100'
-                                    } `}
-                                    onClick={() => setActiveMenu(item.index)}
-                                >
-                                    <div className="flex flex-col justify-center gap-2">
-                                        <span
-                                            className={`flex w-min items-center whitespace-nowrap rounded-xl ${bgColorClasses[color]} px-2 py-1 text-sm font-bold text-black`}
+                        {/* Stats Card */}
+                        <div className="mb-5 rounded-xl border border-gray-200 bg-white p-3 shadow-lg">
+                            <div className="flex flex-col items-center justify-between">
+                                <div className="flex gap-2 rounded-lg bg-gray-200 px-2 py-1">
+                                    <ChevronRight className="mt-1 h-5 w-7 rounded-full bg-white text-gray-400" />
+                                    <p className="text-gray-800">
+                                        <strong>
+                                            Dato objetivo asociado:{' '}
+                                        </strong>
+                                        El 65% de las pymes industriales en
+                                        España sigue dependiendo de terminales
+                                        físicos locales para acceder a sus
+                                        sistemas de planta.
+                                    </p>
+                                </div>
+                                <div className="flex items-center justify-between rounded-lg px-4 py-2 text-2xl">
+                                    <div>
+                                        <h2
+                                            className={`mb-1 flex items-center gap-2 text-xl font-extrabold text-blue-500`}
                                         >
-                                            {title}
-                                        </span>
-                                        <span className="text-left text-sm">
-                                            {item.title}
-                                        </span>
-                                    </div>
-                                    <div className="flex w-full items-center">
-                                        {activeMenu === item.index && (
-                                            <ChevronRight className="ml-auto h-4 w-4" />
-                                        )}
-                                    </div>
-                                </button>
-                            ))}
-                        </nav>
-                    </aside>
-
-                    <section className="flex-1 bg-white px-8 py-8">
-                        <div className="max-w-4xl">
-                            {/* Header */}
-                            <div className="mb-8">
-                                <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-gray-800">
-                                    <Info
-                                        className={`h-4 w-4 ${textColorClasses[color]}`}
-                                    />
-                                    {menu[activeMenu].title}
-                                </h2>
-                                <p className="text-gray-600">
-                                    Permite acceder al entorno operativo desde
-                                    cualquier navegador, sin restricciones
-                                    técnicas ni necesidad de instalaciones
-                                    locales.
-                                </p>
-                            </div>
-
-                            {/* Stats Card */}
-                            <div className="mb-5 rounded-xl border border-gray-200 bg-white p-3 shadow-lg">
-                                <div className="flex flex-col items-center justify-between">
-                                    <div className="flex gap-2 rounded-lg bg-gray-200 px-2 py-1">
-                                        <ChevronRight className="mt-1 h-5 w-7 rounded-full bg-white text-gray-400" />
-                                        <p className="text-gray-800">
-                                            <strong>
-                                                Dato objetivo asociado:{' '}
-                                            </strong>
-                                            El 65% de las pymes industriales en
-                                            España sigue dependiendo de
-                                            terminales físicos locales para
-                                            acceder a sus sistemas de planta.
+                                            La Oportunidad
+                                        </h2>
+                                        <p className="text-base text-gray-700">
+                                            Esta dependencia técnica limita la
+                                            capacidad de reacción, impide el
+                                            acceso distribuido y encarece el
+                                            soporte. Poder acceder desde
+                                            cualquier dispositivo elimina
+                                            fricciones operativas clave.
                                         </p>
                                     </div>
-                                    <div className="flex items-center justify-between rounded-lg px-4 py-2 text-2xl">
-                                        <div>
-                                            <h2
-                                                className={`mb-1 flex items-center gap-2 text-xl font-extrabold text-blue-500`}
-                                            >
-                                                La Oportunidad
-                                            </h2>
-                                            <p className="text-base text-gray-700">
-                                                Esta dependencia técnica limita
-                                                la capacidad de reacción, impide
-                                                el acceso distribuido y encarece
-                                                el soporte. Poder acceder desde
-                                                cualquier dispositivo elimina
-                                                fricciones operativas clave.
-                                            </p>
-                                        </div>
-                                        <div className="w-full max-w-[138px]">
-                                            <p className="w-full text-center text-sm text-gray-700">
-                                                Empresas Potenciales
-                                            </p>
-                                            <span
-                                                className={`block w-full text-center font-bold text-blue-500`}
-                                            >
-                                                +53
-                                            </span>
-                                        </div>
+                                    <div className="w-full max-w-[138px]">
+                                        <p className="w-full text-center text-sm text-gray-700">
+                                            Empresas Potenciales
+                                        </p>
+                                        <span
+                                            className={`block w-full text-center font-bold text-blue-500`}
+                                        >
+                                            +53
+                                        </span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            {/* Commercial Application */}
-                            <div>
-                                <h3 className="mb-1 text-lg font-medium text-gray-800">
-                                    Aplicación comercial
-                                </h3>
-                                <p className="mb-4 text-sm text-gray-600">
-                                    Tres industrias más relevantes
-                                </p>
-                                <div className="space-y-4">
-                                    {[
-                                        'Agricultura',
-                                        'Comercio',
-                                        'Industria',
-                                    ].map((industry, index) => (
+                        {/* Commercial Application */}
+                        <div>
+                            <h3 className="mb-1 text-lg font-medium text-gray-800">
+                                Aplicación comercial
+                            </h3>
+                            <p className="mb-4 text-sm text-gray-600">
+                                Tres industrias más relevantes
+                            </p>
+                            <div className="space-y-4">
+                                {['Agricultura', 'Comercio', 'Industria'].map(
+                                    (industry, index) => (
                                         <div
                                             key={index}
                                             className="rounded-lg border border-gray-200 bg-gray-100 p-4 transition-shadow hover:shadow-md"
@@ -170,13 +162,13 @@ export default function Mensaje({ color, menu, title }) {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
+                                    ),
+                                )}
                             </div>
                         </div>
-                    </section>
-                </div>
-            </section>
-        </>
+                    </div>
+                </section>
+            </div>
+        </section>
     );
 }
