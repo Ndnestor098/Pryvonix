@@ -7,8 +7,32 @@ import {
     ChevronRight,
     Database,
 } from 'lucide-react';
+import Mensaje from '../Mensajes';
 
 export default function index() {
+    const menu = [
+        {
+            title: 'Acceder al sistema desde cualquier dispositivo',
+            index: 0,
+        },
+        {
+            title: 'Acceda remotamente sin barreras',
+            index: 1,
+        },
+        {
+            title: 'Gestione múltiples programas',
+            index: 2,
+        },
+        {
+            title: 'Transforme su móvil en centro de control',
+            index: 3,
+        },
+        {
+            title: 'Gestione su escritorio desde cualquier lugar',
+            index: 4,
+        },
+    ];
+
     return (
         <>
             <Head title="Analisis" />
@@ -58,7 +82,7 @@ export default function index() {
                     </div>
 
                     {/* Definition Card */}
-                    <div className="mb-8 rounded-lg border border-blue-300 bg-sky-100 p-4">
+                    <div className="mb-8 max-w-[1230px] rounded-lg border border-blue-300 bg-sky-100 p-4">
                         <div className="flex items-center gap-3">
                             <div className="rounded-lg">
                                 <img
@@ -77,6 +101,27 @@ export default function index() {
                     <div className="mb-4 text-sm font-medium text-gray-600">
                         Resultados agrupados por categorías
                     </div>
+
+                    <Mensaje
+                        color="green"
+                        menu={menu}
+                        title="Control y Accesibilidad"
+                    />
+                    <Mensaje
+                        color="lime"
+                        menu={menu}
+                        title="Eficiencia Operativa"
+                    />
+                    <Mensaje
+                        color="green-2"
+                        menu={menu}
+                        title="Adaptabilidad y Pernalizacion"
+                    />
+                    <Mensaje
+                        color="lime-2"
+                        menu={menu}
+                        title="Innovacion y Valor Añadido"
+                    />
                 </div>
             </Layout>
 

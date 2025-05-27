@@ -1,78 +1,73 @@
 import { Head } from '@inertiajs/react';
-import { ChevronRight, Factory, Info, MonitorSmartphone } from 'lucide-react';
+import { ChevronRight, Factory, Info } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Mensaje() {
-    const color = 'green';
-
+export default function Mensaje({ color, menu, title }) {
     const [activeMenu, setActiveMenu] = useState(0);
 
-    const textColorClasses = {
-        green: 'text-green-600',
-        blue: 'text-blue-600',
-        red: 'text-red-600',
-    };
-
     const bgColorClasses = {
-        green: 'bg-green-100',
-        blue: 'bg-blue-100',
-        red: 'bg-red-100',
+        green: 'bg-emerald-500',
+        lime: 'bg-lime-200',
+        'green-2': 'bg-emerald-300',
+        'lime-2': 'bg-lime-500',
     };
 
-    const menu = [
-        {
-            title: 'Acceder al sistema desde cualquier dispositivo',
-            icon: MonitorSmartphone,
-            index: 0,
-        },
-        {
-            title: 'Acceda remotamente sin barreras',
-            index: 1,
-        },
-        {
-            title: 'Gestione múltiples programas',
-            index: 2,
-        },
-        {
-            title: 'Transforme su móvil en centro de control',
-            index: 3,
-        },
-        {
-            title: 'Gestione su escritorio desde cualquier lugar',
-            index: 4,
-        },
-    ];
+    const borderColorClasses = {
+        green: 'border-l-emerald-500',
+        lime: 'border-l-lime-200',
+        'green-2': 'border-l-emerald-300',
+        'lime-2': 'border-l-lime-500',
+    };
+
+    const textColorClasses = {
+        green: 'text-emerald-500',
+        lime: 'text-lime-200',
+        'green-2': 'text-emerald-300',
+        'lime-2': 'text-lime-500',
+    };
 
     return (
         <>
             <Head title="Mensajes" />
 
-            <section className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 py-12">
+            <section className="relative mb-5 flex items-center">
                 <div className="flex h-full max-w-[1230px] overflow-hidden rounded-xl border border-gray-400 bg-gray-50">
                     {/* Sidebar */}
-                    <aside className="w-72 border-r border-gray-200 bg-white py-6">
-                        <div className="mb-8 border-b border-gray-300 px-6 pb-5">
-                            <h1 className="text-center text-xl font-bold text-gray-800">
-                                Control y Accesibilidad
+                    <aside className="w-72 border-r border-gray-200 bg-white">
+                        {/* Header */}
+                        <div className="border-b border-gray-300 px-4 py-1">
+                            <h1 className="text-lg font-bold text-gray-500">
+                                {title}
                             </h1>
                         </div>
-                        <nav className="space-y-1 px-3">
+
+                        {/* Menu */}
+                        <nav className="space-y-1">
                             {menu.map((item, index) => (
                                 <button
                                     key={index}
-                                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
+                                    className={`flex w-full justify-center gap-3 border-b border-gray-300 px-3 py-2 transition-colors ${
                                         activeMenu === item.index
-                                            ? `${bgColorClasses[color]} ${textColorClasses[color]} cursor-default`
-                                            : 'text-gray-700 hover:bg-gray-100'
-                                    }`}
+                                            ? `cursor-default border-l-[5px] ${borderColorClasses[color]}`
+                                            : 'border-l-[5px] border-l-transparent text-gray-700 hover:bg-gray-100'
+                                    } `}
                                     onClick={() => setActiveMenu(item.index)}
                                 >
-                                    <span className="text-left">
-                                        {item.title}
-                                    </span>
-                                    {activeMenu === item.index && (
-                                        <ChevronRight className="ml-auto h-4 w-4" />
-                                    )}
+                                    <div className="flex flex-col justify-center gap-2">
+                                        <span
+                                            className={`flex w-min items-center whitespace-nowrap rounded-xl ${bgColorClasses[color]} px-2 py-1 text-sm font-bold text-black`}
+                                        >
+                                            {title}
+                                        </span>
+                                        <span className="text-left text-sm">
+                                            {item.title}
+                                        </span>
+                                    </div>
+                                    <div className="flex w-full items-center">
+                                        {activeMenu === item.index && (
+                                            <ChevronRight className="ml-auto h-4 w-4" />
+                                        )}
+                                    </div>
                                 </button>
                             ))}
                         </nav>
@@ -114,7 +109,7 @@ export default function Mensaje() {
                                     <div className="flex items-center justify-between rounded-lg px-4 py-2 text-2xl">
                                         <div>
                                             <h2
-                                                className={`mb-1 flex items-center gap-2 text-xl font-bold ${textColorClasses[color]}`}
+                                                className={`mb-1 flex items-center gap-2 text-xl font-extrabold text-blue-500`}
                                             >
                                                 La Oportunidad
                                             </h2>
@@ -132,7 +127,7 @@ export default function Mensaje() {
                                                 Empresas Potenciales
                                             </p>
                                             <span
-                                                className={`block w-full text-center font-bold ${textColorClasses[color]}`}
+                                                className={`block w-full text-center font-bold text-blue-500`}
                                             >
                                                 +53
                                             </span>

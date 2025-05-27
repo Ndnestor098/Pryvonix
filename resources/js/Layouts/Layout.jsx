@@ -136,7 +136,7 @@ export default function Layout({ children, title, subMenu }) {
                 </div>
 
                 {/* Main content */}
-                <main className="min-h-screen flex-1 px-16 py-10">
+                <main className="flex min-h-screen w-full flex-1 justify-center px-16 py-10">
                     {children}
                 </main>
             </div>
