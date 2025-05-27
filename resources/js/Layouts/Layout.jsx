@@ -11,7 +11,13 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Layout({ children, title, subMenu }) {
+export default function Layout({
+    children,
+    title,
+    subMenu,
+    selectSubMenu,
+    setSelectSubMenu,
+}) {
     const [hideAside, setHideAside] = useState(true);
     const currentUrl = usePage().url;
 
@@ -112,7 +118,7 @@ export default function Layout({ children, title, subMenu }) {
 
                             {/* Area de textos y SubMenus */}
                             <div className="mt-5 flex flex-col gap-3 text-gray-500">
-                                {subMenu()}
+                                {subMenu(selectSubMenu, setSelectSubMenu)}
                             </div>
 
                             {/* Boton para cerrar */}

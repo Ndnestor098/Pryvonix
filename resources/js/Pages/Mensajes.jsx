@@ -1,29 +1,82 @@
 import { ChevronRight, Factory, Info } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Mensaje({ color, menu, title }) {
+function colors(select) {
+    const array = {
+        Resultados: [
+            {
+                0: 'bg-emerald-500',
+                1: 'bg-lime-200',
+                2: 'bg-emerald-300',
+                3: 'bg-lime-500',
+            },
+            {
+                0: 'border-l-emerald-500',
+                1: 'border-l-lime-200',
+                2: 'border-l-emerald-300',
+                3: 'border-l-lime-500',
+            },
+            {
+                0: 'text-emerald-500',
+                1: 'text-lime-200',
+                2: 'text-emerald-300',
+                3: 'text-lime-500',
+            },
+        ],
+        Problemas: [
+            {
+                0: 'bg-red-500',
+                1: 'bg-rose-300',
+                2: 'bg-red-400',
+                3: 'bg-rose-500',
+                4: 'bg-rose-400',
+            },
+            {
+                0: 'border-l-red-500',
+                1: 'border-l-rose-300',
+                2: 'border-l-red-400',
+                3: 'border-l-rose-500',
+                4: 'border-l-rose-700',
+            },
+            {
+                0: 'text-red-500',
+                1: 'text-rose-300',
+                2: 'text-red-400',
+                3: 'text-rose-500',
+                4: 'text-rose-800',
+            },
+        ],
+        'Casos de Uso': [
+            {
+                0: 'bg-blue-500',
+                1: 'bg-sky-200',
+                2: 'bg-blue-300',
+                3: 'bg-sky-400',
+            },
+            {
+                0: 'border-l-blue-500',
+                1: 'border-l-sky-200',
+                2: 'border-l-blue-300',
+                3: 'border-l-sky-400',
+            },
+            {
+                0: 'text-blue-500',
+                1: 'text-sky-200',
+                2: 'text-blue-300',
+                3: 'text-sky-400',
+            },
+        ],
+    };
+
+    return array[select];
+}
+
+export default function Mensaje({ color, menu, title, idx }) {
     const [activeMenu, setActiveMenu] = useState(0);
 
-    const bgColorClasses = {
-        green: 'bg-emerald-500',
-        lime: 'bg-lime-200',
-        'green-2': 'bg-emerald-300',
-        'lime-2': 'bg-lime-500',
-    };
-
-    const borderColorClasses = {
-        green: 'border-l-emerald-500',
-        lime: 'border-l-lime-200',
-        'green-2': 'border-l-emerald-300',
-        'lime-2': 'border-l-lime-500',
-    };
-
-    const textColorClasses = {
-        green: 'text-emerald-500',
-        lime: 'text-lime-200',
-        'green-2': 'text-emerald-300',
-        'lime-2': 'text-lime-500',
-    };
+    const bgColorClasses = colors(color)[0];
+    const borderColorClasses = colors(color)[1];
+    const textColorClasses = colors(color)[2];
 
     return (
         <section className="relative mb-5 flex items-center">
@@ -44,14 +97,14 @@ export default function Mensaje({ color, menu, title }) {
                                 key={index}
                                 className={`flex w-full justify-center gap-3 border-b border-gray-300 px-3 py-2 transition-colors ${
                                     activeMenu === item.index
-                                        ? `cursor-default border-l-[5px] ${borderColorClasses[color]}`
+                                        ? `cursor-default border-l-[5px] ${borderColorClasses[idx]}`
                                         : 'border-l-[5px] border-l-transparent text-gray-700 hover:bg-gray-100'
                                 } `}
                                 onClick={() => setActiveMenu(item.index)}
                             >
                                 <div className="flex flex-col justify-center gap-2">
                                     <span
-                                        className={`flex w-min items-center whitespace-nowrap rounded-xl ${bgColorClasses[color]} px-2 py-1 text-sm font-bold text-black`}
+                                        className={`flex w-min items-center whitespace-nowrap rounded-xl ${bgColorClasses[idx]} px-2 py-1 text-sm font-bold text-black`}
                                     >
                                         {title}
                                     </span>
@@ -69,13 +122,14 @@ export default function Mensaje({ color, menu, title }) {
                     </nav>
                 </aside>
 
+                {/* Content */}
                 <section className="flex-1 bg-white px-8 py-8">
                     <div className="max-w-4xl">
                         {/* Header */}
                         <div className="mb-8">
                             <h2 className="mb-1 flex items-center gap-2 text-xl font-bold text-gray-800">
                                 <Info
-                                    className={`h-4 w-4 ${textColorClasses[color]}`}
+                                    className={`h-4 w-4 ${textColorClasses[idx]}`}
                                 />
                                 {menu[activeMenu].title}
                             </h2>
