@@ -84,7 +84,10 @@ export default function Layout({ children, title, subMenu }) {
                         const isActive =
                             url === 'home.index'
                                 ? currentUrl === routeUrl
-                                : currentUrl.startsWith(routeUrl);
+                                : routeUrl.includes(
+                                      currentUrl.split('/')[1] != '' &&
+                                          currentUrl.split('/')[1],
+                                  );
 
                         return (
                             <Link

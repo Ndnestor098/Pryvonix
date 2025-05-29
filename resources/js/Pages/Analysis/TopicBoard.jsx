@@ -22,7 +22,7 @@ export default function TopicBoard({ info }) {
             <div className="mb-6 flex items-center gap-2 text-gray-600">
                 <span>Arsenal de Mensajes</span>
                 <ChevronRight className="h-4 w-4" />
-                <span>Selección de Resultados</span>
+                <span>Selección de {info.title}</span>
             </div>
 
             {/* Header */}
