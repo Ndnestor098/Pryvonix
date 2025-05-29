@@ -71,7 +71,22 @@ function colors(select) {
     return array[select];
 }
 
-export default function Mensaje({ color, menu, title, idx }) {
+/**
+ * Componente que renderiza una tarjeta de tema, con un sidebar para navegar entre
+ * los diferentes subtemas y un contenido principal que muestra la información
+ * asociada a cada subtema.
+ *
+ * @param {string} color - El color del tema, que se utiliza para personalizar
+ *     la apariencia de la tarjeta.
+ * @param {Array} menu - Un array de objetos con la siguiente estructura:
+ *     - index: El índice del subtema en el array.
+ *     - title: El título del subtema.
+ * @param {string} title - El título del tema.
+ * @param {number} idx - El índice del tema en el array de temas.
+ *
+ * @returns Un JSX element que representa la tarjeta del tema.
+ */
+export default function TopicCard({ color, menu, title, idx }) {
     const [activeMenu, setActiveMenu] = useState(0);
 
     const bgColorClasses = colors(color)[0];

@@ -11,13 +11,16 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Layout({
-    children,
-    title,
-    subMenu,
-    selectSubMenu,
-    setSelectSubMenu,
-}) {
+/**
+ * Componente principal de la aplicacion, que renderiza el layout completo.
+ *
+ * @param {JSX.Element} children - El contenido principal de la pagina.
+ * @param {string} title - El titulo de la pagina.
+ * @param {function} subMenu - Una funcion que renderiza el menu lateral derecho.
+ *
+ * @returns Un JSX element que representa el layout completo.
+ */
+export default function Layout({ children, title, subMenu }) {
     const [hideAside, setHideAside] = useState(true);
     const currentUrl = usePage().url;
 
@@ -30,7 +33,7 @@ export default function Layout({
         {
             icon: Pen,
             label: 'Análisis',
-            url: 'analysis.index',
+            url: 'analysis.results',
         },
         {
             icon: SquareLibrary,
@@ -56,7 +59,7 @@ export default function Layout({
                 <div className="flex items-center gap-9">
                     <div className="flex w-10 items-center justify-center">
                         <Link href={route('home.index')}>
-                            <img src="assets/images/logo.png" alt="Logotipo" />
+                            <img src="/assets/images/logo.png" alt="Logotipo" />
                         </Link>
                     </div>
                     <MenuSelector />
@@ -118,7 +121,7 @@ export default function Layout({
 
                             {/* Area de textos y SubMenus */}
                             <div className="mt-5 flex flex-col gap-3 text-gray-500">
-                                {subMenu(selectSubMenu, setSelectSubMenu)}
+                                {subMenu()}
                             </div>
 
                             {/* Boton para cerrar */}

@@ -1,12 +1,21 @@
+import TopicCard from '@/Components/TopicCard';
 import {
     ChartNoAxesColumn,
     ChevronDown,
     ChevronRight,
     Database,
 } from 'lucide-react';
-import Mensaje from '../Mensajes';
 
-export default function Results({ info }) {
+/**
+ * Componente que renderiza una tarjeta de tema, con un sidebar para navegar entre
+ * los diferentes subtemas y un contenido principal que muestra la información
+ * asociada a cada subtema.
+ *
+ * @param {{ title: string, text: string, submenu: { [groupName: string]: { title: string, description: string }[] } }} info - Información del tema.
+ *
+ * @returns Un JSX element que representa la tarjeta del tema.
+ */
+export default function TopicBoard({ info }) {
     return (
         <div>
             {/* Breadcrumb */}
@@ -72,7 +81,7 @@ export default function Results({ info }) {
             </div>
 
             {Object.entries(info.submenu).map(([groupName, items], idx) => (
-                <Mensaje
+                <TopicCard
                     key={idx}
                     idx={idx}
                     color={info.title}
