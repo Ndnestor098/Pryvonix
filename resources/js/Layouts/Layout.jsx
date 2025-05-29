@@ -1,3 +1,4 @@
+import ApplicationLogo from '@/Components/ApplicationLogo';
 import MenuSelector from '@/Components/MenuSelector';
 import { Link, usePage } from '@inertiajs/react';
 import {
@@ -59,7 +60,7 @@ export default function Layout({ children, title, subMenu }) {
                 <div className="flex items-center gap-9">
                     <div className="flex w-10 items-center justify-center">
                         <Link href={route('home.index')}>
-                            <img src="/assets/images/logo.png" alt="Logotipo" />
+                            <ApplicationLogo />
                         </Link>
                     </div>
                     <MenuSelector />

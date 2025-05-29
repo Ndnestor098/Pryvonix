@@ -9,18 +9,21 @@ function colors(select) {
                 1: 'bg-lime-200',
                 2: 'bg-emerald-300',
                 3: 'bg-lime-500',
+                4: 'bg-lime-400',
             },
             {
                 0: 'border-l-emerald-500',
                 1: 'border-l-lime-200',
                 2: 'border-l-emerald-300',
                 3: 'border-l-lime-500',
+                4: 'border-l-lime-400',
             },
             {
                 0: 'text-emerald-500',
                 1: 'text-lime-200',
                 2: 'text-emerald-300',
                 3: 'text-lime-500',
+                4: 'text-lime-400',
             },
         ],
         Problemas: [
@@ -52,18 +55,21 @@ function colors(select) {
                 1: 'bg-sky-200',
                 2: 'bg-blue-300',
                 3: 'bg-sky-400',
+                4: 'bg-sky-500',
             },
             {
                 0: 'border-l-blue-500',
                 1: 'border-l-sky-200',
                 2: 'border-l-blue-300',
                 3: 'border-l-sky-400',
+                4: 'border-l-sky-500',
             },
             {
                 0: 'text-blue-500',
                 1: 'text-sky-200',
                 2: 'text-blue-300',
                 3: 'text-sky-400',
+                4: 'text-sky-500',
             },
         ],
     };
