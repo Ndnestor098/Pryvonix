@@ -66,10 +66,10 @@ Route::get('/step/5', function (Request $request)  {
 })->name('step-five');
 
 Route::post('/temp-store', function (Request $request) {
-    session()->put('wizard.clients', $request->clients);
-    session()->put('wizard.company', $request->company);
-    session()->put('wizard.web', $request->web);
-    session()->put('wizard.successes', $request->successes);
-    
-    return response()->json(['ok' => true]);
+    if ($request->clients) session()->put('wizard.clients', $request->clients);
+    if ($request->company) session()->put('wizard.company', $request->company);
+    if ($request->web) session()->put('wizard.web', $request->web);
+    if ($request->successes) session()->put('wizard.successes', $request->successes);    
+
+    return response()->json(['request' => $request->all()]);
 })->name('store-step-data');

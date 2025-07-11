@@ -11,7 +11,7 @@ const handleClick = async (e) => {
 
     try {
         const response = await axios.post(
-            route('content-generator.temp-store'),
+            route('content-generator.store-step-data'),
             selectedSuccessData.map(({ name, description }) => ({
                 name,
                 description,

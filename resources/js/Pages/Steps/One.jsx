@@ -1,7 +1,30 @@
 import ProgressSteps from '@/Components/ProgressSteps';
-import { Head, Link } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Edit, ExternalLink, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
+
+const handleClick = async (e, services, selectedService) => {
+    e.preventDefault();
+
+    if (services.length === 0) return;
+
+    try {
+        const response = await axios.post(
+            route('content-generator.store-step-data'),
+            {
+                company: services.find((s) => s.id === selectedService)?.name,
+                web: services.find((s) => s.id === selectedService)?.url,
+            },
+        );
+
+        if (response.status === 200) {
+            router.visit(route('content-generator.step-two'));
+            console.log('response', response);
+        }
+    } catch (error) {
+        console.error('Error al guardar los datos temporales:', error);
+    }
+};
 
 export default function One() {
     const [selectedService, setSelectedService] = useState(null);
@@ -173,28 +196,18 @@ export default function One() {
                             </p>
                         )}
 
-                        <Link
-                            href={route('content-generator.step-two', {
-                                company: services.find(
-                                    (s) => s.id === selectedService,
-                                )?.name,
-                                web: services.find(
-                                    (s) => s.id === selectedService,
-                                )?.url,
-                            })}
-                            onClick={(e) => {
-                                if (!selectedService) {
-                                    e.preventDefault();
-                                }
-                            }}
-                            className={`block w-full rounded-lg px-4 py-3 text-center font-medium transition-colors ${
+                        <button
+                            onClick={(e) =>
+                                handleClick(e, services, selectedService)
+                            }
+                            className={`w-full rounded-lg px-4 py-3 text-center font-medium transition-colors ${
                                 selectedService
                                     ? 'bg-purple-600 text-white hover:bg-purple-700'
                                     : 'cursor-not-allowed bg-gray-200 text-gray-400'
                             }`}
                         >
                             Siguiente
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
