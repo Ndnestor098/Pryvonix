@@ -1,0 +1,244 @@
+import { Link } from '@inertiajs/react';
+import { Edit, ExternalLink, RotateCcw } from 'lucide-react';
+import { useState } from 'react';
+
+export default function One() {
+    const [selectedService, setSelectedService] = useState(null);
+
+    const services = [
+        {
+            id: 1,
+            name: 'Miro Service',
+            url: 'https://miroservice',
+            image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop',
+        },
+        {
+            id: 2,
+            name: 'Derecho Comparado',
+            url: 'https://derechocomparado',
+            image: 'https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop',
+        },
+        {
+            id: 3,
+            name: 'Asesoría y Gestoría',
+            url: 'https://asesoriaygestoria',
+            image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop',
+        },
+        {
+            id: 4,
+            name: 'Arquitectura',
+            url: 'https://arquitectura',
+            image: 'https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop',
+        },
+        {
+            id: 5,
+            name: 'Planificación Fiscal',
+            url: 'https://planificacionfiscal',
+            image: 'https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop',
+        },
+    ];
+
+    const steps = [
+        { id: 1, name: 'Seleccionar Servicio', active: true },
+        { id: 2, name: 'Clientes Potenciales', active: false },
+        { id: 3, name: 'Éxitos del Servicio', active: false },
+        { id: 4, name: 'Contextualización Industrial', active: false },
+        { id: 5, name: 'Creación de Contenido', active: false },
+    ];
+
+    return (
+        <div className="min-h-screen bg-gray-50">
+            {/* Header with Progress Steps */}
+            <div className="border-b border-gray-200 bg-white px-6 py-4">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-4 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
+                                <div className="h-6 w-6 rounded bg-blue-600"></div>
+                            </div>
+                            <span className="text-sm text-gray-600">
+                                Panel de Control
+                            </span>
+                        </div>
+                        <button className="text-gray-400 hover:text-gray-600">
+                            <svg
+                                className="h-5 w-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Progress Steps */}
+                    <div className="flex items-center justify-between">
+                        {steps.map((step, index) => (
+                            <div key={step.id} className="flex items-center">
+                                <div className="flex flex-col items-center">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                    step.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-400'
+                                }`}>
+                                    {step.id}
+                                </div>
+                                <span className={`text-xs mt-1 ${
+                                    step.active ? 'text-blue-600 font-medium' : 'text-gray-400'
+                                }`}>
+                                    {step.name}
+                                </span>
+                                </div>
+                                {index < steps.length - 1 && (
+                                <div className={`w-16 h-0.5 mx-4 ${
+                                    step.active ? 'bg-blue-500' : 'bg-gray-200'
+                                }`}></div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="mx-auto max-w-7xl px-6 py-8">
+                <div className="flex gap-8">
+                    {/* Left Sidebar */}
+                    <div className="w-80 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+                        <div className="flex flex-col items-center mb-6">
+                        <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+                            <div className="w-8 h-8 bg-blue-600 rounded"></div>
+                        </div>
+                        <h3 className="font-semibold text-gray-900">Paso 1</h3>
+                        <p className="text-sm text-gray-600 text-center">Seleccionar Servicio</p>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="flex-1">
+                        <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+                            {/* Header */}
+                            <div className="mb-8">
+                                <div className="bg-gray-100 rounded-lg p-4 mb-6">
+                                <p className="text-gray-700">
+                                    Selecciona <span className="font-semibold">1</span> servicio para crear Contenido
+                                </p>
+                                </div>
+                                
+                                <div className="flex gap-4 mb-8">
+                                <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+                                    <Edit className="w-4 h-4" />
+                                    Editar Servicios
+                                </button>
+                                <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+                                    <RotateCcw className="w-4 h-4" />
+                                    Repetir análisis
+                                </button>
+                                </div>
+                            </div>
+
+                            {/* Services List */}
+                            <div className="space-y-8">
+                                {services.map((service) => (
+                                    <div
+                                        key={service.id}
+                                        className="border-b border-gray-100 pb-8 last:border-b-0"
+                                    >
+                                        <h3 className="mb-4 text-lg font-semibold text-gray-900">
+                                            {service.name}
+                                        </h3>
+
+                                        <div className="flex items-center justify-between rounded-lg bg-gray-50 p-4">
+                                            <div className="flex items-center gap-4">
+                                                <img
+                                                    src={service.image}
+                                                    alt={service.name}
+                                                    className="h-12 w-12 rounded-lg object-cover"
+                                                />
+                                                <div>
+                                                    <h4 className="font-medium text-gray-900">
+                                                        {service.name}
+                                                    </h4>
+                                                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                                                        <span>
+                                                            {service.url}
+                                                        </span>
+                                                    </div>
+                                                    <button className="mt-1 flex text-xs text-blue-600 hover:text-blue-700">
+                                                        <ExternalLink className="h-3 w-3" />
+                                                        Editar
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                onClick={() =>
+                                                    setSelectedService(
+                                                        service.id,
+                                                    )
+                                                }
+                                                className={`rounded-full border-2 px-6 py-2 font-medium transition-colors ${
+                                                    selectedService ===
+                                                    service.id
+                                                        ? 'border-blue-600 bg-blue-600 text-white'
+                                                        : 'border-blue-600 bg-white text-blue-600 hover:bg-blue-50'
+                                                }`}
+                                            >
+                                                Seleccionar
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Sidebar */}
+                    <div className="w-80 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+                        <h3 className="mb-4 font-semibold text-gray-900">
+                            Servicio Seleccionado
+                        </h3>
+
+                        {selectedService ? (
+                            <div className="mb-6">
+                                <p className="mb-4 text-sm text-gray-600">
+                                    {
+                                        services.find(
+                                            (s) => s.id === selectedService,
+                                        )?.name
+                                    }
+                                </p>
+                            </div>
+                        ) : (
+                            <p className="mb-6 text-sm text-gray-500">
+                                Ningún servicio seleccionado
+                            </p>
+                        )}
+
+                        <Link
+                            href={route('content-generator.step-two', {
+                                company: services.find(
+                                    (s) => s.id === selectedService,
+                                )?.name,
+                                web: services.find(
+                                    (s) => s.id === selectedService,
+                                )?.url,
+                            })}
+                            disabled={!selectedService}
+                            className={`block w-full rounded-lg px-4 py-3 text-center font-medium transition-colors ${
+                                selectedService
+                                    ? 'bg-purple-600 text-white hover:bg-purple-700'
+                                    : 'cursor-not-allowed bg-gray-200 text-gray-400'
+                            }`}
+                        >
+                            Siguiente
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

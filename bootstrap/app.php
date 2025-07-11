@@ -30,6 +30,9 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::prefix('/perfil')
                 ->name('profile.')
                 ->group(base_path('routes/profile.php'));
+            Route::prefix('/content-generator')
+                ->name('content-generator.')
+                ->group(base_path('routes/content_generator.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
