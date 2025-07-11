@@ -19,7 +19,6 @@ const handleClick = async (e, services, selectedService) => {
 
         if (response.status === 200) {
             router.visit(route('content-generator.step-two'));
-            console.log('response', response);
         }
     } catch (error) {
         console.error('Error al guardar los datos temporales:', error);

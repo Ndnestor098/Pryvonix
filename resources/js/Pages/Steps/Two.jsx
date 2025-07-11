@@ -1,11 +1,34 @@
 import ProgressSteps from '@/Components/ProgressSteps';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { Building, Edit, Plus, RotateCcw, Users } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Two({ company, web }) {
+const handleClick = async (e, selectedClientData) => {
+    e.preventDefault();
+
+    if (selectedClientData.length === 0) return;
+
+    try {
+        const response = await axios.post(
+            route('content-generator.store-step-data'),
+            {
+                clients: selectedClientData.map(({ name, service }) => ({
+                    name,
+                    service,
+                })),
+            },
+        );
+
+        if (response.status === 200) {
+            router.visit(route('content-generator.step-three'));
+        }
+    } catch (error) {
+        console.error('Error al guardar los datos temporales:', error);
+    }
+};
+
+export default function Two() {
     const [selectedClients, setSelectedClients] = useState([]);
-    const localUrl = usePage().url;
 
     const steps = [
         { id: 1, name: 'Seleccionar Servicio', active: false },
@@ -276,31 +299,18 @@ export default function Two({ company, web }) {
                             >
                                 Anterior
                             </Link>
-                            <Link
-                                href={route('content-generator.step-three', {
-                                    company,
-                                    web,
-                                    clients: selectedClientData.map(
-                                        ({ name, service }) => ({
-                                            name,
-                                            service,
-                                        }),
-                                    ),
-                                    previousStep: localUrl,
-                                })}
-                                onClick={(e) => {
-                                    if (selectedClientData.length === 0) {
-                                        e.preventDefault();
-                                    }
-                                }}
-                                className={`block w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
+                            <button
+                                onClick={(e) =>
+                                    handleClick(e, selectedClientData)
+                                }
+                                className={`w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
                                     selectedClientData.length > 0
                                         ? 'bg-purple-600 text-white hover:bg-purple-700'
                                         : 'cursor-not-allowed bg-gray-200 text-gray-400'
                                 }`}
                             >
                                 Siguiente
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>
