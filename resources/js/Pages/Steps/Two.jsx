@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Edit, RotateCcw, ExternalLink, Users, Building, Plus } from 'lucide-react';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Two() {
     const [selectedClients, setSelectedClients] = useState([]);
@@ -58,6 +58,8 @@ export default function Two() {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Head title="Paso 2" />
+
             {/* Header with Progress Steps */}
             <div className="border-b border-gray-200 bg-white px-6 py-4">
                 <div className="max-w-7xl mx-auto">

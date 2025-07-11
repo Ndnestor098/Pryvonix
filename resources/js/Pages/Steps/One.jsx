@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Edit, ExternalLink, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 
@@ -48,6 +48,7 @@ export default function One() {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Head title="Paso 1" />
             {/* Header with Progress Steps */}
             <div className="border-b border-gray-200 bg-white px-6 py-4">
                 <div className="mx-auto max-w-7xl">
