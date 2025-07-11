@@ -1,6 +1,6 @@
-import { router } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 
-export default function BeforeStartingSteps({ company, web, service }) {
+export default function BeforeStartingSteps() {
     const steps = [
         {
             title: 'Paso 1: Seleccion del Servicio',
@@ -24,16 +24,6 @@ export default function BeforeStartingSteps({ company, web, service }) {
         },
     ];
 
-    const handleClick = () => {
-        router.visit(
-            route('content-generator.step-one', {
-                company: company,
-                web: web,
-                service: service,
-            }),
-        );
-    };
-
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-8">
             <div className="mx-auto max-w-6xl">
@@ -56,11 +46,12 @@ export default function BeforeStartingSteps({ company, web, service }) {
                                                 <div className="mb-2 flex items-center gap-2">
                                                     <div className="h-6 w-6 rounded bg-blue-600"></div>
                                                     <div className="text-xs font-semibold">
-                                                        {company}
+                                                        Creacion de contenido
                                                     </div>
                                                 </div>
                                                 <div className="mb-1 text-xs text-gray-600">
-                                                    {service}
+                                                    El mejor sistema de Creacion
+                                                    de contenido
                                                 </div>
                                             </div>
 
@@ -69,7 +60,7 @@ export default function BeforeStartingSteps({ company, web, service }) {
                                                     Sitio Web
                                                 </div>
                                                 <div className="text-xs text-white opacity-90">
-                                                    {web}
+                                                    https://pryvonix.com
                                                 </div>
                                             </div>
 
@@ -112,12 +103,12 @@ export default function BeforeStartingSteps({ company, web, service }) {
                             </h2>
                         </div>
 
-                        <button
-                            onClick={handleClick}
+                        <Link
+                            href={route('content-generator.step-one')}
                             className="rounded-full bg-purple-600 px-8 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-purple-700"
                         >
                             Iniciar Paso 1
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

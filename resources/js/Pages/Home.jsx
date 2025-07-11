@@ -1,6 +1,6 @@
 import Up from '@/Components/Up';
 import Layout from '@/Layouts/Layout';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import {
     CircleHelp,
     Cog,
@@ -10,36 +10,8 @@ import {
     RefreshCw,
     Wrench,
 } from 'lucide-react';
-import { useState } from 'react';
 
 export default function Home() {
-    const [formData, setFormData] = useState({
-        company: '',
-        web: '',
-        service: '',
-    });
-
-    const handleInputChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = () => {
-        if (
-            formData.company === '' ||
-            formData.web === '' ||
-            formData.service === ''
-        ) {
-            alert('Todos los campos son obligatorios');
-            return;
-        }
-        router.visit(
-            route('content-generator.before-starting-steps', formData),
-        );
-    };
-
     const stepMenu = [
         {
             title: 'Arsenal de Mensajes',
@@ -96,53 +68,14 @@ export default function Home() {
 
                     {/* Form Section */}
                     <section className="mb-12 flex flex-col items-center rounded-xl bg-white p-6 shadow-md">
-                        <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-                            <div className="relative space-y-2 rounded-md border border-gray-300 p-4">
-                                <label className="text-xl font-extrabold text-gray-900">
-                                    Empresa
-                                </label>
-                                <input
-                                    type="text"
-                                    name="company"
-                                    value={formData.company}
-                                    onChange={handleInputChange}
-                                    placeholder="Ariage Technologies"
-                                    className="h-full max-h-12 w-full rounded-lg border-none p-2.5 focus:border-none focus:outline-none"
-                                />
-                            </div>
-                            <div className="relative space-y-2 rounded-md border border-gray-300 p-4">
-                                <label className="text-xl font-extrabold text-gray-900">
-                                    Web
-                                </label>
-                                <input
-                                    type="url"
-                                    name="web"
-                                    value={formData.web}
-                                    onChange={handleInputChange}
-                                    placeholder="https://ariage.com"
-                                    className="h-full max-h-12 w-full rounded-lg border-none p-2.5 focus:border-none focus:outline-none"
-                                />
-                            </div>
-                            <div className="relative space-y-2 rounded-md border border-gray-300 p-4">
-                                <label className="text-xl font-extrabold text-gray-900">
-                                    Servicio
-                                </label>
-                                <input
-                                    type="text"
-                                    name="service"
-                                    value={formData.service}
-                                    onChange={handleInputChange}
-                                    placeholder="Mondarian Interface for Remote Operators"
-                                    className="h-full max-h-12 w-full rounded-lg border-none p-2.5 focus:border-none focus:outline-none"
-                                />
-                            </div>
-                        </div>
-                        <button
-                            onClick={handleSubmit}
+                        <Link
+                            href={route(
+                                'content-generator.before-starting-steps',
+                            )}
                             className="mt-4 rounded-lg bg-blue-500 px-6 py-2 font-extrabold text-white hover:bg-morado-200"
                         >
                             Crear Contenido
-                        </button>
+                        </Link>
                     </section>
 
                     {/* Next Step Section */}

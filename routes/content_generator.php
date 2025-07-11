@@ -5,29 +5,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/before-starting-steps', function (Request $request)  {
-
-    $company = $request->company;
-    $web = $request->web;
-    $service = $request->service;
-
-    return Inertia::render('BeforeStartingSteps', compact([
-        'company',
-        'web',
-        'service',
-    ]));
+    return Inertia::render('BeforeStartingSteps');
 })->name('before-starting-steps');
 
 Route::get('/step/1', function (Request $request)  {
-
-    $company = $request->company;
-    $web = $request->web;
-    $service = $request->service;
-
-    return Inertia::render('Steps/One', compact([
-        'company',
-        'web',
-        'service',
-    ]));
+    return Inertia::render('Steps/One');
 })->name('step-one');
 
 Route::get('/step/2', function (Request $request)  {
