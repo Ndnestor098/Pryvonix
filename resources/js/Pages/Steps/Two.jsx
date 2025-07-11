@@ -1,9 +1,11 @@
+import ProgressSteps from '@/Components/ProgressSteps';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { Building, Edit, Plus, RotateCcw, Users } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Two({ company, web }) {
     const [selectedClients, setSelectedClients] = useState([]);
+    const localUrl = usePage().url;
 
     const steps = [
         { id: 1, name: 'Seleccionar Servicio', active: false },
@@ -60,96 +62,12 @@ export default function Two({ company, web }) {
         selectedClients.includes(client.id),
     );
 
-    const localUrl = usePage().url;
-
     return (
         <div className="min-h-screen bg-gray-50">
             <Head title="Paso 2" />
 
             {/* Header with Progress Steps */}
-            <div className="border-b border-gray-200 bg-white px-6 py-4">
-                <div className="mx-auto max-w-7xl">
-                    {/* Header */}
-                    <div className="mb-4 flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
-                                <div className="h-6 w-6 rounded bg-blue-600"></div>
-                            </div>
-                            <span className="text-sm text-gray-600">
-                                Panel de Control
-                            </span>
-                        </div>
-                        <button className="text-gray-400 hover:text-gray-600">
-                            <svg
-                                className="h-5 w-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-
-                    {/* Progress Steps */}
-                    <div className="flex items-center justify-between">
-                        {steps.map((step, index) => (
-                            <div key={step.id} className="flex items-center">
-                                <div className="flex flex-col items-center">
-                                    <div
-                                        className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                                            step.completed
-                                                ? 'bg-blue-500 text-white'
-                                                : step.active
-                                                  ? 'bg-blue-500 text-white'
-                                                  : 'bg-gray-200 text-gray-400'
-                                        }`}
-                                    >
-                                        {step.completed ? (
-                                            <svg
-                                                className="h-4 w-4"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        ) : (
-                                            step.id
-                                        )}
-                                    </div>
-                                    <span
-                                        className={`mt-1 text-xs ${
-                                            step.active
-                                                ? 'font-medium text-blue-600'
-                                                : 'text-gray-400'
-                                        }`}
-                                    >
-                                        {step.name}
-                                    </span>
-                                </div>
-                                {index < steps.length - 1 && (
-                                    <div
-                                        className={`mx-4 h-0.5 w-16 ${
-                                            step.completed || step.active
-                                                ? 'bg-blue-500'
-                                                : 'bg-gray-200'
-                                        }`}
-                                    ></div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            <ProgressSteps steps={steps} />
 
             <div className="mx-auto max-w-7xl px-6 py-8">
                 <div className="flex gap-8">
