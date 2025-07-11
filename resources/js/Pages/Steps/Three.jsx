@@ -1,11 +1,33 @@
 import ProgressSteps from '@/Components/ProgressSteps';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
+import axios from 'axios';
 import { Check, Edit, RotateCcw, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Three({ company, web, clients, previousStep }) {
+const handleClick = async (e) => {
+    e.preventDefault();
+
+    if (selectedSuccessData.length === 0) return;
+
+    try {
+        const response = await axios.post(
+            route('content-generator.temp-store'),
+            selectedSuccessData.map(({ name, description }) => ({
+                name,
+                description,
+            })),
+        );
+
+        if (response.status === 200) {
+            router.visit(route('content-generator.step-four'));
+        }
+    } catch (error) {
+        console.error('Error al guardar los datos temporales:', error);
+    }
+};
+
+export default function Three() {
     const [selectedSuccesses, setSelectedSuccesses] = useState([]);
-    const localUrl = usePage().url;
 
     const serviceSuccesses = [
         {
@@ -192,37 +214,21 @@ export default function Three({ company, web, clients, previousStep }) {
 
                         <div className="flex gap-2">
                             <Link
-                                href={previousStep}
+                                href={route('content-generator.step-two')}
                                 className="block w-full flex-1 rounded-lg border border-gray-300 px-4 py-3 text-center font-medium text-gray-700 transition-colors hover:bg-gray-50"
                             >
                                 Anterior
                             </Link>
-                            <Link
-                                href={route('content-generator.step-three', {
-                                    company,
-                                    web,
-                                    clients,
-                                    successes: selectedSuccessData.map(
-                                        ({ name, description }) => ({
-                                            name,
-                                            description,
-                                        }),
-                                    ),
-                                    previousStep: localUrl,
-                                })}
-                                onClick={(e) => {
-                                    if (selectedSuccessData.length === 0) {
-                                        e.preventDefault();
-                                    }
-                                }}
-                                className={`block w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
+                            <button
+                                onClick={handleClick}
+                                className={`w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
                                     selectedSuccessData.length > 0
                                         ? 'bg-purple-600 text-white hover:bg-purple-700'
                                         : 'cursor-not-allowed bg-gray-200 text-gray-400'
                                 }`}
                             >
                                 Siguiente
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>

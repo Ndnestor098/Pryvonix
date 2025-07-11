@@ -13,10 +13,8 @@ Route::get('/step/1', function (Request $request)  {
 })->name('step-one');
 
 Route::get('/step/2', function (Request $request)  {
-
     $company = $request->company;
     $web = $request->web;
-    
 
     return Inertia::render('Steps/Two', compact([
         'company',
@@ -39,15 +37,18 @@ Route::get('/step/3', function (Request $request) {
 })->name('step-three');
 
 Route::get('/step/4', function (Request $request)  {
-
     $company = $request->company;
     $web = $request->web;
-    $service = $request->service;
+    $clients = $request->clients;
+    $successes = $request->successes;
+    $previousStep = $request->previousStep;
 
     return Inertia::render('Steps/Four', compact([
         'company',
         'web',
-        'service',
+        'clients',
+        'successes',
+        'previousStep',
     ]));
 })->name('step-four');
 
@@ -63,3 +64,12 @@ Route::get('/step/5', function (Request $request)  {
         'service',
     ]));
 })->name('step-five');
+
+Route::post('/temp-store', function (Request $request) {
+    session()->put('wizard.clients', $request->clients);
+    session()->put('wizard.company', $request->company);
+    session()->put('wizard.web', $request->web);
+    session()->put('wizard.successes', $request->successes);
+    
+    return response()->json(['ok' => true]);
+})->name('store-step-data');
