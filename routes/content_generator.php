@@ -24,18 +24,17 @@ Route::get('/step/2', function (Request $request)  {
     ]));
 })->name('step-two');
 
-Route::get('/step/3', function (Request $request)  {
-
+Route::get('/step/3', function (Request $request) {
     $company = $request->company;
     $web = $request->web;
-    $name = $request->name;
-    $service = $request->service;
+    $clients = $request->clients;
+    $previousStep = $request->previousStep;
 
     return Inertia::render('Steps/Three', compact([
         'company',
         'web',
-        'service',
-        'name'
+        'clients',
+        'previousStep',
     ]));
 })->name('step-three');
 

@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { Building, Edit, Plus, RotateCcw, Users } from 'lucide-react';
 import { useState } from 'react';
 
@@ -59,6 +59,8 @@ export default function Two({ company, web }) {
     const selectedClientData = potentialClients.filter((client) =>
         selectedClients.includes(client.id),
     );
+
+    const localUrl = usePage().url;
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -366,6 +368,7 @@ export default function Two({ company, web }) {
                                             service,
                                         }),
                                     ),
+                                    previousStep: localUrl,
                                 })}
                                 onClick={(e) => {
                                     if (selectedClientData.length === 0) {
