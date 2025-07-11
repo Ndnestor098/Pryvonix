@@ -246,7 +246,11 @@ export default function One() {
                                     (s) => s.id === selectedService,
                                 )?.url,
                             })}
-                            disabled={!selectedService}
+                            onClick={(e) => {
+                                if (!selectedService) {
+                                    e.preventDefault();
+                                }
+                            }}
                             className={`block w-full rounded-lg px-4 py-3 text-center font-medium transition-colors ${
                                 selectedService
                                     ? 'bg-purple-600 text-white hover:bg-purple-700'

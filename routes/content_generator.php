@@ -16,12 +16,11 @@ Route::get('/step/2', function (Request $request)  {
 
     $company = $request->company;
     $web = $request->web;
-    $service = $request->service;
+    
 
     return Inertia::render('Steps/Two', compact([
         'company',
         'web',
-        'service',
     ]));
 })->name('step-two');
 
@@ -29,12 +28,14 @@ Route::get('/step/3', function (Request $request)  {
 
     $company = $request->company;
     $web = $request->web;
+    $name = $request->name;
     $service = $request->service;
 
     return Inertia::render('Steps/Three', compact([
         'company',
         'web',
         'service',
+        'name'
     ]));
 })->name('step-three');
 
