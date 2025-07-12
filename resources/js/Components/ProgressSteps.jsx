@@ -1,4 +1,10 @@
-export default function ProgressSteps({ steps, confirmation = false }) {
+import { Check } from 'lucide-react';
+
+export default function ProgressSteps({
+    steps,
+    confirmation = false,
+    confirmAllSteps = false,
+}) {
     return (
         <div className="border-b border-gray-200 bg-white px-6 py-4">
             <div className="mx-auto max-w-7xl">
@@ -35,18 +41,22 @@ export default function ProgressSteps({ steps, confirmation = false }) {
                             <div className="flex flex-col items-center">
                                 <div
                                     className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                                        step.active
+                                        confirmAllSteps
                                             ? 'bg-blue-500 text-white'
-                                            : 'bg-gray-200 text-gray-400'
+                                            : step.active
+                                              ? 'bg-blue-500 text-white'
+                                              : 'bg-gray-200 text-gray-400'
                                     }`}
                                 >
-                                    {step.id}
+                                    {confirmAllSteps ? <Check /> : step.id}
                                 </div>
                                 <span
                                     className={`mt-1 text-xs ${
-                                        step.active
+                                        confirmAllSteps
                                             ? 'font-medium text-blue-600'
-                                            : 'text-gray-400'
+                                            : step.active
+                                              ? 'font-medium text-blue-600'
+                                              : 'text-gray-400'
                                     }`}
                                 >
                                     {step.name}
