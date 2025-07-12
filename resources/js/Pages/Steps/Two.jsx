@@ -23,7 +23,7 @@ const handleClick = async (e, selectedClientData) => {
         );
 
         if (response.status === 200) {
-            router.visit(route('content-generator.step-three'));
+            router.visit(route('content-generator.confirmation', { step: 2 }));
         }
     } catch (error) {
         console.error('Error al guardar los datos temporales:', error);

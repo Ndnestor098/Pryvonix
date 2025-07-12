@@ -21,7 +21,7 @@ const handleClick = async (e, services, selectedService) => {
         );
 
         if (response.status === 200) {
-            router.visit(route('content-generator.step-two'));
+            router.visit(route('content-generator.confirmation', { step: 1 }));
         }
     } catch (error) {
         console.error('Error al guardar los datos temporales:', error);
