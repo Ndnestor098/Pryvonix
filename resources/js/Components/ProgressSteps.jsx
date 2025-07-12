@@ -1,4 +1,4 @@
-export default function ProgressSteps({ steps }) {
+export default function ProgressSteps({ steps, confirmation = false }) {
     return (
         <div className="border-b border-gray-200 bg-white px-6 py-4">
             <div className="mx-auto max-w-7xl">
@@ -55,7 +55,9 @@ export default function ProgressSteps({ steps }) {
                             {index < steps.length - 1 && (
                                 <div
                                     className={`mx-4 h-0.5 w-16 ${
-                                        step.active
+                                        confirmation &&
+                                        String(step.id) ===
+                                            String(confirmation[0])
                                             ? 'bg-blue-500'
                                             : 'bg-gray-200'
                                     }`}

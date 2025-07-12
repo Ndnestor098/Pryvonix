@@ -54,45 +54,44 @@ Route::post('/temp-store', function (Request $request) {
 Route::get('/confirmation', function (Request $request) {
     switch ($request->step) {
         case '1':
-            return Inertia::render('Steps/Confirmation', compact([
+            return Inertia::render('Steps/Confirmation', [
                 'company' => session()->get('wizard.company'),
                 'web' => session()->get('wizard.web'),
                 'step' => '1'
-            ]));
+            ]);
             break;
         case '2':
-            return Inertia::render('Steps/Confirmation', compact([
+            return Inertia::render('Steps/Confirmation', [
                 'company' => session()->get('wizard.company'),
                 'web' => session()->get('wizard.web'),
                 'clients' => session()->get('wizard.clients'),
                 'step' => '2'
-            ]));
+            ]);
             break;
         case '3':
-            return Inertia::render('Steps/Confirmation', compact([
+            return Inertia::render('Steps/Confirmation', [
                 'company' => session()->get('wizard.company'),
                 'web' => session()->get('wizard.web'),
                 'clients' => session()->get('wizard.clients'),
                 'successes' => session()->get('wizard.successes'),
-                'context' => session()->get('wizard.context'),
                 'step' => '3'
-            ]));
+            ]);
             break;
         case '4':
-            return Inertia::render('Steps/Confirmation', compact([
+            return Inertia::render('Steps/Confirmation', [
                 'company' => session()->get('wizard.company'),
                 'web' => session()->get('wizard.web'),
                 'clients' => session()->get('wizard.clients'),
                 'successes' => session()->get('wizard.successes'),
                 'context' => session()->get('wizard.context'),
                 'step' => '4'
-            ]));
+            ]);
             break;
         
         default:
-            return Inertia::render('Steps/Confirmation', compact([
+            return Inertia::render('Steps/Confirmation', [
                 'step' => 'none'
-            ]));
+            ]);
             break;
     } ($request->step);
 
