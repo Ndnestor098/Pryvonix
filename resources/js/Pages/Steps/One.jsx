@@ -15,6 +15,9 @@ const handleClick = async (e, services, selectedService) => {
                 company: services.find((s) => s.id === selectedService)?.name,
                 web: services.find((s) => s.id === selectedService)?.url,
             },
+            {
+                withCredentials: true,
+            },
         );
 
         if (response.status === 200) {

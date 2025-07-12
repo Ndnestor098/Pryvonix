@@ -17,6 +17,9 @@ const handleClick = async (e, selectedClientData) => {
                     service,
                 })),
             },
+            {
+                withCredentials: true,
+            },
         );
 
         if (response.status === 200) {

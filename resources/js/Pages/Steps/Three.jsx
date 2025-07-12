@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Check, Edit, RotateCcw, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 
-const handleClick = async (e) => {
+const handleClick = async (e, selectedSuccessData) => {
     e.preventDefault();
 
     if (selectedSuccessData.length === 0) return;
@@ -12,10 +12,12 @@ const handleClick = async (e) => {
     try {
         const response = await axios.post(
             route('content-generator.store-step-data'),
-            selectedSuccessData.map(({ name, description }) => ({
-                name,
-                description,
-            })),
+            {
+                successes: selectedSuccessData.map(({ name, description }) => ({
+                    name,
+                    description,
+                })),
+            },
         );
 
         if (response.status === 200) {
@@ -220,7 +222,9 @@ export default function Three() {
                                 Anterior
                             </Link>
                             <button
-                                onClick={handleClick}
+                                onClick={(e) =>
+                                    handleClick(e, selectedSuccessData)
+                                }
                                 className={`w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
                                     selectedSuccessData.length > 0
                                         ? 'bg-purple-600 text-white hover:bg-purple-700'
