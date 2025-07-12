@@ -2,7 +2,7 @@ import ProgressSteps from '@/Components/ProgressSteps';
 import { Head, router } from '@inertiajs/react';
 import { FileText } from 'lucide-react';
 
-export default function Four({
+export default function Confirmation({
     step,
     company,
     web,

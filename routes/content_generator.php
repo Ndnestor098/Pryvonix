@@ -27,6 +27,21 @@ Route::get('/step/4', function ()  {
     return Inertia::render('Steps/Four');
 })->name('step-four');
 
+Route::get('/step/5', function ()  {
+    return Inertia::render('Steps/Five');
+})->name('step-five');
+
+Route::get('/view/{name}', function ()  {
+
+    return Inertia::render('Steps/View', [
+        'company' => session()->get('wizard.company'),
+        'web' => session()->get('wizard.web'),
+        'clients' => session()->get('wizard.clients'),
+        'successes' => session()->get('wizard.successes'),
+        'context' => session()->get('wizard.context'),
+    ]);
+})->name('view');
+
 Route::post('/temp-store', function (Request $request) {
     if ($request->has('company')) {
         session()->put('wizard.company', $request->company);
@@ -97,7 +112,3 @@ Route::get('/confirmation', function (Request $request) {
 
 })->name('confirmation');
 
-
-Route::get('/step/5', function ()  {
-    return Inertia::render('Steps/Five');
-})->name('step-five');
