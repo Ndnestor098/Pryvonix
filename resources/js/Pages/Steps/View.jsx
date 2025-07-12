@@ -1,8 +1,8 @@
 import ProgressSteps from '@/Components/ProgressSteps';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Edit, Eye, MoreHorizontal, Plus, X } from 'lucide-react';
 
-export default function View() {
+export default function View({ context }) {
     const steps = [
         { id: 1, name: 'Seleccionar Servicio', active: false },
         { id: 2, name: 'Clientes Potenciales', active: false },
@@ -10,6 +10,7 @@ export default function View() {
         { id: 4, name: 'Contextualización Industrial', active: false },
         { id: 5, name: 'Creación de Contenido', active: false },
     ];
+
     return (
         <div className="min-h-screen bg-gray-50">
             <Head title="Resultado Final" />
@@ -17,23 +18,39 @@ export default function View() {
             {/* Progress Steps */}
             <ProgressSteps steps={steps} confirmAllSteps={true} />
 
-            <div className="mx-auto max-w-7xl px-6 py-8">
+            <div className="mx-auto max-w-[1440px] px-6 py-8">
                 <div className="flex gap-8">
                     {/* Left Sidebar */}
-                    <div className="w-64 border-r border-gray-200 bg-white p-6">
+                    <div className="relative mt-2 w-64 rounded-md border border-gray-200 bg-white px-6">
+                        {/* Header Navigation */}
+                        <div className="absolute right-0 top-0 flex w-full items-center justify-center border-b bg-gray-50">
+                            <div className="flex items-center gap-4">
+                                <Link
+                                    href={route('content-generator.step-five')}
+                                    className="text-sm text-gray-600 hover:text-gray-800"
+                                >
+                                    Paso Anterior
+                                </Link>
+                                <span className="text-gray-300">|</span>
+                                <span className="text-sm font-medium text-gray-900">
+                                    Paso 5
+                                </span>
+                            </div>
+                        </div>
+
                         {/* Header with Logo */}
-                        <div className="mb-8">
+                        <div className="mb-8 mt-8">
                             <div className="relative mb-4 flex h-16 w-full items-center justify-center overflow-hidden rounded-lg bg-orange-500">
                                 <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-600"></div>
                                 <div className="relative z-10 text-lg font-bold text-white">
-                                    RESULTADOS DIGITALES
+                                    REVISTAS DIGITALES
                                 </div>
                                 <div className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white">
                                     <Edit className="h-3 w-3 text-orange-500" />
                                 </div>
-                                <div className="absolute bottom-1 left-2 flex h-4 w-4 items-center justify-center rounded-full bg-purple-600">
+                                <div className="absolute bottom-1 left-2 flex h-4 items-center justify-center rounded-md bg-purple-600 px-2">
                                     <span className="text-xs font-bold text-white">
-                                        A
+                                        AvusM7
                                     </span>
                                 </div>
                             </div>
@@ -42,7 +59,7 @@ export default function View() {
                         {/* Company Info */}
                         <div className="mb-8">
                             <h2 className="mb-1 text-xl font-bold text-gray-900">
-                                Arquitectura
+                                {context.industry}
                             </h2>
 
                             <p className="mb-4 text-sm text-gray-600">
@@ -54,7 +71,7 @@ export default function View() {
                                     <Plus className="h-4 w-4" />
                                     Crear
                                 </button>
-                                <button className="flex w-full items-center gap-2 rounded-lg border-gray-300 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50">
+                                <button className="flex w-full items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50">
                                     <Eye className="h-4 w-4" />
                                     Ver como miembro
                                 </button>
@@ -87,22 +104,9 @@ export default function View() {
 
                     {/* Main Content */}
                     <div className="flex-1 p-8">
-                        {/* Header Navigation */}
-                        <div className="mb-8 flex items-center justify-between">
-                            <div className="flex items-center gap-4">
-                                <button className="text-sm text-gray-600 hover:text-gray-800">
-                                    Paso Anterior
-                                </button>
-                                <span className="text-gray-300">|</span>
-                                <span className="text-sm font-medium text-gray-900">
-                                    Paso 5
-                                </span>
-                            </div>
-                        </div>
-
                         <div className="max-w-4xl">
                             {/* Introduction Section */}
-                            <section className="mb-12">
+                            <section className="mb-5 rounded-lg border border-gray-200 bg-white p-6">
                                 <h2 className="mb-4 text-2xl font-bold text-gray-900">
                                     Introducción
                                 </h2>
@@ -145,7 +149,7 @@ export default function View() {
                             </section>
 
                             {/* Problem Section */}
-                            <section className="mb-12">
+                            <section className="mb-5 rounded-lg border border-gray-200 bg-white p-6">
                                 <h2 className="mb-4 text-2xl font-bold text-gray-900">
                                     Problema
                                 </h2>
@@ -195,7 +199,7 @@ export default function View() {
                             </section>
 
                             {/* Use Case Section */}
-                            <section>
+                            <section className="rounded-lg border border-gray-200 bg-white p-6">
                                 <div className="mb-6 flex items-start justify-between">
                                     <div>
                                         <h2 className="mb-2 text-2xl font-bold text-gray-900">
@@ -228,7 +232,7 @@ export default function View() {
                     </div>
 
                     {/* Right Sidebar */}
-                    <div className="w-80 border-l border-gray-200 bg-white p-6">
+                    <div className="mt-8 w-80 rounded-md border border-gray-200 bg-white p-6">
                         <h3 className="mb-4 text-lg font-semibold text-gray-900">
                             Contenido
                         </h3>
