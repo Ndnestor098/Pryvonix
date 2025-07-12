@@ -1,18 +1,40 @@
 import ProgressSteps from '@/Components/ProgressSteps';
-import { Link, usePage } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { Building, Edit, RotateCcw, User } from 'lucide-react';
 import { useState } from 'react';
-// import { useState } from 'react';
 
-export default function Four({
-    company,
-    web,
-    clients,
-    successes,
-    previousStep,
-}) {
-    const [selectedContext, setSelectedContext] = useState([]);
-    const localUrl = usePage().url;
+const handleClick = async (e, selectedContext) => {
+    e.preventDefault();
+
+    if (!selectedContext.industry) return;
+
+    try {
+        const response = await axios.post(
+            route('content-generator.store-step-data'),
+            {
+                context: selectedContext,
+            },
+            {
+                withCredentials: true,
+            },
+        );
+
+        if (response.status === 200) {
+            router.visit(route('content-generator.step-five'));
+        }
+    } catch (error) {
+        console.error('Error al guardar los datos temporales:', error);
+    }
+};
+
+export default function Four() {
+    const [selectedContext, setSelectedContext] = useState({
+        industry: '',
+        subtitle: '',
+        companies: [],
+        decisors: [],
+    });
+
     const steps = [
         { id: 1, name: 'Seleccionar Servicio', active: false },
         { id: 2, name: 'Clientes Potenciales', active: false },
@@ -92,6 +114,8 @@ export default function Four({
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Head title="Paso 4" />
+
             {/* Header with Progress Steps */}
             <ProgressSteps steps={steps} />
 
@@ -111,6 +135,7 @@ export default function Four({
                             </p>
                         </div>
                     </div>
+
                     {/* Main Content */}
                     <div className="flex-1">
                         <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
@@ -155,7 +180,19 @@ export default function Four({
                                                 (company, idx) => (
                                                     <div
                                                         key={idx}
-                                                        className="text-center"
+                                                        onClick={() => {
+                                                            setSelectedContext({
+                                                                industry:
+                                                                    context.industry,
+                                                                subtitle:
+                                                                    context.subtitle,
+                                                                companies:
+                                                                    company,
+                                                                decisors:
+                                                                    context.decisors,
+                                                            });
+                                                        }}
+                                                        className="w-[123px] rounded-md p-1 text-center transition-all duration-300 hover:cursor-pointer hover:bg-gray-100"
                                                     >
                                                         <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
                                                             <company.icon className="h-6 w-6 text-gray-600" />
@@ -178,6 +215,7 @@ export default function Four({
                                             <p className="mb-4 text-sm font-medium text-gray-700">
                                                 Contextualización por decisores
                                             </p>
+
                                             <div className="flex justify-around gap-4">
                                                 {context.decisors.map(
                                                     (decisor, idx) => (
@@ -213,38 +251,33 @@ export default function Four({
                             Contextualización
                         </h3>
 
-                        <p className="mb-6 text-sm text-gray-500">
-                            Ningún servicio seleccionado
-                        </p>
+                        {selectedContext ? (
+                            <div className="mb-6">
+                                <p className="mb-1 text-sm text-gray-600">
+                                    {selectedContext.companies.description}
+                                </p>
+                                <p className="mb-4 text-sm text-gray-600">
+                                    {selectedContext.companies.type}
+                                </p>
+                            </div>
+                        ) : (
+                            <p className="mb-6 text-sm text-gray-500">
+                                Ningún contexto seleccionado
+                            </p>
+                        )}
 
                         <div className="flex gap-2">
                             <Link
-                                href={previousStep}
+                                href={route('content-generator.step-three')}
                                 className="block w-full flex-1 rounded-lg border border-gray-300 px-4 py-3 text-center font-medium text-gray-700 transition-colors hover:bg-gray-50"
                             >
                                 Anterior
                             </Link>
                             <Link
-                                href={route('content-generator.step-four', {
-                                    company,
-                                    web,
-                                    clients,
-                                    successes,
-                                    contextualizations: selectedContext.map(
-                                        ({ name, description }) => ({
-                                            name,
-                                            description,
-                                        }),
-                                    ),
-                                    previousStep: localUrl,
-                                })}
-                                onClick={(e) => {
-                                    if (selectedContext.length === 0) {
-                                        e.preventDefault();
-                                    }
-                                }}
+                                href={route('content-generator.step-four')}
+                                onClick={(e) => handleClick(e, selectedContext)}
                                 className={`block w-full flex-1 rounded-lg px-4 py-3 text-center font-medium transition-colors ${
-                                    selectedContext.length > 0
+                                    selectedContext.industry
                                         ? 'bg-purple-600 text-white hover:bg-purple-700'
                                         : 'cursor-not-allowed bg-gray-200 text-gray-400'
                                 }`}
